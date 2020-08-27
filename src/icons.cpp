@@ -29,13 +29,14 @@ void initialize_images(void)
 		_img_watchdog = new wxBitmap(wxImage(sm));
 	}
 
-#ifdef PLUGIN_USE_SVG
 //    wxFileName fn;
 //   fn.SetPath(*GetpSharedDataLocation());
 //    fn.AppendDir(_T("plugins"));
 //    fn.AppendDir(_T("watchdog_pi"));
 //    fn.AppendDir(_T("data"));
 //    fn.SetFullName(_T("watchdog_pi.svg"));
+
+#ifdef PLUGIN_USE_SVG
     wxFileName fn;
     fn.SetPath(GetPluginDataDir("watchdog_pi"));
     fn.AppendDir(_T("data"));
