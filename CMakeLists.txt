@@ -50,10 +50,9 @@ endif(COMMAND cmake_policy)
 SET(VERBOSE_NAME "Burton")
 set(COMMON_NAME "Burton")  # Search "getcommonname"in burton_pi.cpp
 set(TITLE_NAME "Burton")
-set(PACKAGE_CONTACT "Sean d'Epagnier")
+set(PACKAGE_CONTACT "Charles Parent")
 set(PACKAGE "burton_pi")
-set(SHORT_DESCRIPTION "Implement burton ability for opencpn")
-set(LONG_DESCRIPTION "Multiple Configurable alarms for  changing conditions for boundaries, cog, landfall, ais, wind, nmea, weather, pypilot, wind, deadman, etc.")
+set(SHORT_DESCRIPTION "Move boat during Dead Reckoning")
 
 set(VERSION_MAJOR "2")
 set(VERSION_MINOR "4")
