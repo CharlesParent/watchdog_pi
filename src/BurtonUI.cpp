@@ -5,11 +5,11 @@
 // PLEASE DO *NOT* EDIT THIS FILE!
 ///////////////////////////////////////////////////////////////////////////
 
-#include "WatchdogUI.h"
+#include "BurtonUI.h"
 
 ///////////////////////////////////////////////////////////////////////////
 
-WatchdogDialogBase::WatchdogDialogBase( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+BurtonDialogBase::BurtonDialogBase( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxSize( -1,-1 ), wxSize( -1,-1 ) );
 
@@ -58,35 +58,35 @@ WatchdogDialogBase::WatchdogDialogBase( wxWindow* parent, wxWindowID id, const w
 	m_Configuration = new wxMenuItem( m_Menu, wxID_ANY, wxString( _("Configuration") ) , wxEmptyString, wxITEM_NORMAL );
 	m_Menu->Append( m_Configuration );
 
-	this->Connect( wxEVT_RIGHT_DOWN, wxMouseEventHandler( WatchdogDialogBase::WatchdogDialogBaseOnContextMenu ), NULL, this );
+	this->Connect( wxEVT_RIGHT_DOWN, wxMouseEventHandler( BurtonDialogBase::BurtonDialogBaseOnContextMenu ), NULL, this );
 
 
 	this->Centre( wxBOTH );
 
 	// Connect Events
-	m_lStatus->Connect( wxEVT_LEFT_DCLICK, wxMouseEventHandler( WatchdogDialogBase::OnDoubleClick ), NULL, this );
-	m_lStatus->Connect( wxEVT_LEFT_DOWN, wxMouseEventHandler( WatchdogDialogBase::OnLeftDown ), NULL, this );
-	m_lStatus->Connect( wxEVT_RIGHT_DOWN, wxMouseEventHandler( WatchdogDialogBase::OnRightDown ), NULL, this );
-	m_Menu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WatchdogDialogBase::OnNew ), this, m_New->GetId());
-	m_Menu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WatchdogDialogBase::OnEdit ), this, m_Edit->GetId());
-	m_Menu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WatchdogDialogBase::OnReset ), this, m_Reset->GetId());
-	m_Menu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WatchdogDialogBase::OnDelete ), this, m_Delete->GetId());
-	m_Menu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WatchdogDialogBase::OnResetAll ), this, m_ResetAll->GetId());
-	m_Menu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WatchdogDialogBase::OnDeleteAll ), this, m_DeleteAll->GetId());
-	m_Menu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WatchdogDialogBase::OnConfiguration ), this, m_Configuration->GetId());
+	m_lStatus->Connect( wxEVT_LEFT_DCLICK, wxMouseEventHandler( BurtonDialogBase::OnDoubleClick ), NULL, this );
+	m_lStatus->Connect( wxEVT_LEFT_DOWN, wxMouseEventHandler( BurtonDialogBase::OnLeftDown ), NULL, this );
+	m_lStatus->Connect( wxEVT_RIGHT_DOWN, wxMouseEventHandler( BurtonDialogBase::OnRightDown ), NULL, this );
+	m_Menu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( BurtonDialogBase::OnNew ), this, m_New->GetId());
+	m_Menu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( BurtonDialogBase::OnEdit ), this, m_Edit->GetId());
+	m_Menu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( BurtonDialogBase::OnReset ), this, m_Reset->GetId());
+	m_Menu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( BurtonDialogBase::OnDelete ), this, m_Delete->GetId());
+	m_Menu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( BurtonDialogBase::OnResetAll ), this, m_ResetAll->GetId());
+	m_Menu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( BurtonDialogBase::OnDeleteAll ), this, m_DeleteAll->GetId());
+	m_Menu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( BurtonDialogBase::OnConfiguration ), this, m_Configuration->GetId());
 }
 
-WatchdogDialogBase::~WatchdogDialogBase()
+BurtonDialogBase::~BurtonDialogBase()
 {
 	// Disconnect Events
-	m_lStatus->Disconnect( wxEVT_LEFT_DCLICK, wxMouseEventHandler( WatchdogDialogBase::OnDoubleClick ), NULL, this );
-	m_lStatus->Disconnect( wxEVT_LEFT_DOWN, wxMouseEventHandler( WatchdogDialogBase::OnLeftDown ), NULL, this );
-	m_lStatus->Disconnect( wxEVT_RIGHT_DOWN, wxMouseEventHandler( WatchdogDialogBase::OnRightDown ), NULL, this );
+	m_lStatus->Disconnect( wxEVT_LEFT_DCLICK, wxMouseEventHandler( BurtonDialogBase::OnDoubleClick ), NULL, this );
+	m_lStatus->Disconnect( wxEVT_LEFT_DOWN, wxMouseEventHandler( BurtonDialogBase::OnLeftDown ), NULL, this );
+	m_lStatus->Disconnect( wxEVT_RIGHT_DOWN, wxMouseEventHandler( BurtonDialogBase::OnRightDown ), NULL, this );
 
 	delete m_Menu;
 }
 
-WatchdogPropertiesDialogBase::WatchdogPropertiesDialogBase( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+BurtonPropertiesDialogBase::BurtonPropertiesDialogBase( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 
@@ -150,7 +150,7 @@ WatchdogPropertiesDialogBase::WatchdogPropertiesDialogBase( wxWindow* parent, wx
 	m_staticTextOther->Wrap( -1 );
 	m_fgSizerProperties->Add( m_staticTextOther, 0, wxALL, 5 );
 
-	m_staticTextOtherVal = new wxStaticText( this, wxID_ANY, _("Please report problems using FlySpray at:\nhttp://willkamp.com/opencpn/flyspray/index.php?project=0&do=index&switch=1\n\nor\n\nat the OpenCPN forum:\nhttp://www.cruisersforum.com/forums/f134\n\nor\n\nRaise an issue in GIT at:\nhttps://github.com/seandepagnier/watchdog_pi/issues\n"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticTextOtherVal = new wxStaticText( this, wxID_ANY, _("Please report problems using FlySpray at:\nhttp://willkamp.com/opencpn/flyspray/index.php?project=0&do=index&switch=1\n\nor\n\nat the OpenCPN forum:\nhttp://www.cruisersforum.com/forums/f134\n\nor\n\nRaise an issue in GIT at:\nhttps://github.com/seandepagnier/burton_pi/issues\n"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticTextOtherVal->Wrap( -1 );
 	m_fgSizerProperties->Add( m_staticTextOtherVal, 0, wxALL, 5 );
 
@@ -174,15 +174,15 @@ WatchdogPropertiesDialogBase::WatchdogPropertiesDialogBase( wxWindow* parent, wx
 	this->Centre( wxBOTH );
 
 	// Connect Events
-	m_button7->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WatchdogPropertiesDialogBase::OnAboutAuthor ), NULL, this );
-	m_buttonOK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WatchdogPropertiesDialogBase::OnWatchdogPropertiesOKClick ), NULL, this );
+	m_button7->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BurtonPropertiesDialogBase::OnAboutAuthor ), NULL, this );
+	m_buttonOK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BurtonPropertiesDialogBase::OnBurtonPropertiesOKClick ), NULL, this );
 }
 
-WatchdogPropertiesDialogBase::~WatchdogPropertiesDialogBase()
+BurtonPropertiesDialogBase::~BurtonPropertiesDialogBase()
 {
 	// Disconnect Events
-	m_button7->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WatchdogPropertiesDialogBase::OnAboutAuthor ), NULL, this );
-	m_buttonOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WatchdogPropertiesDialogBase::OnWatchdogPropertiesOKClick ), NULL, this );
+	m_button7->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BurtonPropertiesDialogBase::OnAboutAuthor ), NULL, this );
+	m_buttonOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BurtonPropertiesDialogBase::OnBurtonPropertiesOKClick ), NULL, this );
 
 }
 
@@ -206,10 +206,10 @@ ConfigurationDialogBase::ConfigurationDialogBase( wxWindow* parent, wxWindowID i
 	m_rbAlways = new wxRadioButton( sbSizer41->GetStaticBox(), wxID_ANY, _("Enable All Alarms"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer241->Add( m_rbAlways, 0, wxALL, 5 );
 
-	m_rbOnce = new wxRadioButton( sbSizer41->GetStaticBox(), wxID_ANY, _("Enabled after first time Watchdog Dialog is visible"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_rbOnce = new wxRadioButton( sbSizer41->GetStaticBox(), wxID_ANY, _("Enabled after first time Burton Dialog is visible"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer241->Add( m_rbOnce, 0, wxALL, 5 );
 
-	m_rbVisible = new wxRadioButton( sbSizer41->GetStaticBox(), wxID_ANY, _("Enabled only if Watchdog Dialog is visible"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_rbVisible = new wxRadioButton( sbSizer41->GetStaticBox(), wxID_ANY, _("Enabled only if Burton Dialog is visible"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer241->Add( m_rbVisible, 0, wxALL, 5 );
 
 	m_rbNever = new wxRadioButton( sbSizer41->GetStaticBox(), wxID_ANY, _("Disable All Alarms"), wxDefaultPosition, wxDefaultSize, 0 );

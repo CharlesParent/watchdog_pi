@@ -49,9 +49,9 @@
 #define ANCHORALARM 1003
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Class WatchdogDialogBase
+/// Class BurtonDialogBase
 ///////////////////////////////////////////////////////////////////////////////
-class WatchdogDialogBase : public wxDialog
+class BurtonDialogBase : public wxDialog
 {
 	private:
 
@@ -77,10 +77,10 @@ class WatchdogDialogBase : public wxDialog
 	public:
 		wxListCtrl* m_lStatus;
 
-		WatchdogDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("WatchDog"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxCAPTION|wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxTAB_TRAVERSAL );
-		~WatchdogDialogBase();
+		BurtonDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("WatchDog"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxCAPTION|wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxTAB_TRAVERSAL );
+		~BurtonDialogBase();
 
-		void WatchdogDialogBaseOnContextMenu( wxMouseEvent &event )
+		void BurtonDialogBaseOnContextMenu( wxMouseEvent &event )
 		{
 			this->PopupMenu( m_Menu, event.GetPosition() );
 		}
@@ -88,9 +88,9 @@ class WatchdogDialogBase : public wxDialog
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Class WatchdogPropertiesDialogBase
+/// Class BurtonPropertiesDialogBase
 ///////////////////////////////////////////////////////////////////////////////
-class WatchdogPropertiesDialogBase : public wxDialog
+class BurtonPropertiesDialogBase : public wxDialog
 {
 	private:
 
@@ -114,13 +114,13 @@ class WatchdogPropertiesDialogBase : public wxDialog
 
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnAboutAuthor( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnWatchdogPropertiesOKClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnBurtonPropertiesOKClick( wxCommandEvent& event ) { event.Skip(); }
 
 
 	public:
 
-		WatchdogPropertiesDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("About Watchdog Properties"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxSTAY_ON_TOP );
-		~WatchdogPropertiesDialogBase();
+		BurtonPropertiesDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("About Burton Properties"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxSTAY_ON_TOP );
+		~BurtonPropertiesDialogBase();
 
 };
 
@@ -148,7 +148,7 @@ class ConfigurationDialogBase : public wxDialog
 
 	public:
 
-		ConfigurationDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Watchdog Configuration"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxCAPTION|wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER );
+		ConfigurationDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Burton Configuration"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxCAPTION|wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER );
 		~ConfigurationDialogBase();
 
 };

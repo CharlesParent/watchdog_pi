@@ -1,7 +1,7 @@
 /***************************************************************************
 *
 * Project:  OpenCPN
-* Purpose:  Watchdog Properties Dialog support
+* Purpose:  Burton Properties Dialog support
 * Author:   Jon Gough
 *
 ***************************************************************************
@@ -23,23 +23,39 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,  USA.         *
 **************************************************************************/
 
-#ifndef __WatchdogPropertiesDialog__
-#define __WatchdogPropertiesDialog__
+#include "wx/wxprec.h"
 
-#include "WatchdogUI.h"
-#include <wx/bmpcbox.h>
+#ifndef  WX_PRECOMP
+#include "wx/wx.h"
+#endif //precompiled headers
 
-#define STRINGIFY(x) #x
-#define TOSTRING(x) STRINGIFY(x)
+#include "burton_pi.h"
+#include "BurtonPropertiesDialog.h"
+#include "version.h"
+#include <wx/fontdlg.h>
 
-class WatchdogPropertiesDialog : public WatchdogPropertiesDialogBase
+BurtonPropertiesDialog::BurtonPropertiesDialog( wxWindow* parent )
+:
+BurtonPropertiesDialogBase( parent )
 {
-public:
-    WatchdogPropertiesDialog( wxWindow* parent );
+    m_staticTextNameVal->SetLabel( wxT("Burton Plugin") );
+    m_staticTextMajorVal->SetLabel(wxString::Format(wxT("%i"), PLUGIN_VERSION_MAJOR ));
+    m_staticTextMinorVal->SetLabel(wxString::Format(wxT("%i"), PLUGIN_VERSION_MINOR ));
+    m_staticTextPatchVal->SetLabel( wxT(TOSTRING(PLUGIN_VERSION_PATCH)) );
+    m_staticTextDateVal->SetLabel( wxT(TOSTRING(PLUGIN_VERSION_DATE)) );
 
-protected:
-    void OnWatchdogPropertiesOKClick( wxCommandEvent& event );
-    void OnAboutAuthor( wxCommandEvent& event );
-};
+}
 
-#endif // __WatchdogPropertiesDialog__
+void BurtonPropertiesDialog::OnBurtonPropertiesOKClick( wxCommandEvent& event )
+{
+    Show( false );
+#ifdef __WXOSX__    
+    EndModal(wxID_OK);
+#endif
+    event.Skip();
+}
+
+void BurtonPropertiesDialog::OnAboutAuthor( wxCommandEvent& event )
+{
+    wxLaunchDefaultBrowser(_T(ABOUT_AUTHOR_URL));
+}

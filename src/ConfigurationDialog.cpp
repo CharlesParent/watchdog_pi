@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Project:  OpenCPN
- * Purpose:  watchdog Plugin
+ * Purpose:  burton Plugin
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
@@ -24,22 +24,22 @@
  ***************************************************************************
  */
 
-#include "watchdog_pi.h"
-#include "WatchdogDialog.h"
+#include "burton_pi.h"
+#include "BurtonDialog.h"
 #include "ConfigurationDialog.h"
 #include "NewAlarmDialog.h"
 #include "EditAlarmDialog.h"
 
 enum AlarmConfig { ALARM_TYPE, ALARM_OPTIONS, ALARM_ACTION };
 
-ConfigurationDialog::ConfigurationDialog( watchdog_pi &_watchdog_pi, wxWindow* parent)
-    : ConfigurationDialogBase( parent ), m_watchdog_pi(_watchdog_pi)
+ConfigurationDialog::ConfigurationDialog( burton_pi &_burton_pi, wxWindow* parent)
+    : ConfigurationDialogBase( parent ), m_burton_pi(_burton_pi)
 {
     wxFileConfig *pConf = GetOCPNConfigObject();
-    pConf->SetPath ( _T( "/Settings/Watchdog" ) );
+    pConf->SetPath ( _T( "/Settings/Burton" ) );
     int enabled = pConf->Read ( _T ( "Enabled" ), 1L );
 
-    m_watchdog_pi.m_iEnableType = enabled;
+    m_burton_pi.m_iEnableType = enabled;
     m_rbAlways->SetValue(enabled == 1);
     m_rbOnce->SetValue(enabled == 2);
     m_rbVisible->SetValue(enabled == 3);
@@ -47,7 +47,7 @@ ConfigurationDialog::ConfigurationDialog( watchdog_pi &_watchdog_pi, wxWindow* p
 
     wxFont font(pConf->Read ( _T ( "Font" ), wxFont(14, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL).GetNativeFontInfoDesc()));
     m_font->SetFont(font);
-    m_watchdog_pi.m_WatchdogDialog->m_lStatus->SetFont(font);
+    m_burton_pi.m_BurtonDialog->m_lStatus->SetFont(font);
 }
 
 void ConfigurationDialog::OnEnabled( wxCommandEvent& event )
@@ -62,18 +62,18 @@ void ConfigurationDialog::OnEnabled( wxCommandEvent& event )
     else if(m_rbNever->GetValue())
         enabled = 0;
 
-    m_watchdog_pi.m_iEnableType = enabled;
+    m_burton_pi.m_iEnableType = enabled;
     wxFileConfig *pConf = GetOCPNConfigObject();
-    pConf->SetPath ( _T( "/Settings/Watchdog" ) );
+    pConf->SetPath ( _T( "/Settings/Burton" ) );
     pConf->Write ( _T ( "Enabled" ), enabled );
 }
 
 void ConfigurationDialog::OnFont( wxFontPickerEvent& event )
 {
     wxFont font = event.GetFont();
-    m_watchdog_pi.m_WatchdogDialog->m_lStatus->SetFont(font);
+    m_burton_pi.m_BurtonDialog->m_lStatus->SetFont(font);
     
     wxFileConfig *pConf = GetOCPNConfigObject();
-    pConf->SetPath ( _T( "/Settings/Watchdog" ) );
+    pConf->SetPath ( _T( "/Settings/Burton" ) );
     pConf->Write ( _T ( "Font" ), font.GetNativeFontInfoDesc() );
 }

@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Project:  OpenCPN
- * Purpose:  watchdog Plugin
+ * Purpose:  burton Plugin
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
@@ -31,10 +31,10 @@
 
 #include "wddc.h"
 
-#include "watchdog_pi.h"
-#include "WatchdogDialog.h"
+#include "burton_pi.h"
+#include "BurtonDialog.h"
 #include "ConfigurationDialog.h"
-#include "WatchdogPropertiesDialog.h"
+#include "BurtonPropertiesDialog.h"
 #include "icons.h"
 #include "AIS_Target_Info.h"
 
@@ -82,7 +82,7 @@ double heading_resolve(double degrees, double offset)
 
 extern "C" DECL_EXP opencpn_plugin* create_pi(void *ppimgr)
 {
-    return new watchdog_pi(ppimgr);
+    return new burton_pi(ppimgr);
 }
 
 extern "C" DECL_EXP void destroy_pi(opencpn_plugin* p)
@@ -92,12 +92,12 @@ extern "C" DECL_EXP void destroy_pi(opencpn_plugin* p)
 
 //-----------------------------------------------------------------------------
 //
-//    Watchdog PlugIn Implementation
+//    Burton PlugIn Implementation
 //
 //-----------------------------------------------------------------------------
-watchdog_pi *g_watchdog_pi = NULL;
+burton_pi *g_burton_pi = NULL;
 
-watchdog_pi::watchdog_pi(void *ppimgr)
+burton_pi::burton_pi(void *ppimgr)
     : opencpn_plugin_116(ppimgr)
 {
     // Create the PlugIn icons
@@ -128,7 +128,7 @@ watchdog_pi::watchdog_pi(void *ppimgr)
     g_AISTarget.m_iMMSI = 0;
     g_AISTarget.m_sShipName = wxEmptyString;
 
-    g_watchdog_pi = this;
+    g_burton_pi = this;
 }
 
 //---------------------------------------------------------------------------------------------------------
@@ -137,35 +137,35 @@ watchdog_pi::watchdog_pi(void *ppimgr)
 //
 //---------------------------------------------------------------------------------------------------------
 
-int watchdog_pi::Init(void)
+int burton_pi::Init(void)
 {
     AddLocaleCatalog( PLUGIN_CATALOG_NAME );
 
     Alarm::LoadConfigAll();
 
 #ifdef WATCHDOG_USE_SVG
-    m_leftclick_tool_id = InsertPlugInToolSVG(  "Watchdog" , _svg_watchdog, _svg_watchdog,
-        _svg_watchdog, wxITEM_CHECK, _( "Watchdog" ),  "" , NULL, WATCHDOG_TOOL_POSITION, 0, this);
+    m_leftclick_tool_id = InsertPlugInToolSVG(  "Burton" , _svg_burton, _svg_burton,
+        _svg_burton, wxITEM_CHECK, _( "Burton" ),  "" , NULL, WATCHDOG_TOOL_POSITION, 0, this);
 #else
     m_leftclick_tool_id  = InsertPlugInTool
-        ("", _img_watchdog, _img_watchdog, wxITEM_NORMAL,
-         _("Watchdog"), "", NULL, WATCHDOG_TOOL_POSITION, 0, this);
+        ("", _img_burton, _img_burton, wxITEM_NORMAL,
+         _("Burton"), "", NULL, WATCHDOG_TOOL_POSITION, 0, this);
 #endif
     
     m_PropertiesDialog = NULL;
     m_Timer.Connect(wxEVT_TIMER, wxTimerEventHandler
-                    ( watchdog_pi::OnTimer ), NULL, this);
+                    ( burton_pi::OnTimer ), NULL, this);
     m_Timer.Start(3000);
     
-    m_WatchdogDialog = new WatchdogDialog(*this, GetOCPNCanvasWindow());
-    m_ConfigurationDialog = new ConfigurationDialog(*this, m_WatchdogDialog);
+    m_BurtonDialog = new BurtonDialog(*this, GetOCPNCanvasWindow());
+    m_ConfigurationDialog = new ConfigurationDialog(*this, m_BurtonDialog);
         
     wxIcon icon;
-    icon.CopyFromBitmap(*_img_watchdog);
-    m_WatchdogDialog->SetIcon(icon);
+    icon.CopyFromBitmap(*_img_burton);
+    m_BurtonDialog->SetIcon(icon);
     m_ConfigurationDialog->SetIcon(icon);
 
-    m_bWatchdogDialogShown = false;
+    m_bBurtonDialogShown = false;
     m_cursor_time = wxDateTime::Now();
     m_ValidFixTime = wxDateTime::Now();
 
@@ -181,92 +181,92 @@ int watchdog_pi::Init(void)
             WANTS_CONFIG);
 }
 
-bool watchdog_pi::DeInit(void)
+bool burton_pi::DeInit(void)
 {
     Alarm::SaveConfigAll();
     Alarm::DeleteAll();
 
     //    Record the dialog position
-    if (m_WatchdogDialog)
+    if (m_BurtonDialog)
     {
         if(m_ConfigurationDialog) {
             delete m_ConfigurationDialog;
         }
-        m_WatchdogDialog->Close();
-        delete m_WatchdogDialog;
-        m_WatchdogDialog = NULL;
+        m_BurtonDialog->Close();
+        delete m_BurtonDialog;
+        m_BurtonDialog = NULL;
         m_ConfigurationDialog = NULL;
     }
     
     m_Timer.Stop();
-    m_Timer.Disconnect(wxEVT_TIMER, wxTimerEventHandler( watchdog_pi::OnTimer ), NULL, this);
+    m_Timer.Disconnect(wxEVT_TIMER, wxTimerEventHandler( burton_pi::OnTimer ), NULL, this);
     
     RemovePlugInTool(m_leftclick_tool_id);
 
     return true;
 }
 
-int watchdog_pi::GetAPIVersionMajor()
+int burton_pi::GetAPIVersionMajor()
 {
 
     return OCPN_API_VERSION_MAJOR;
 
 }
 
-int watchdog_pi::GetAPIVersionMinor()
+int burton_pi::GetAPIVersionMinor()
 {
 
  return OCPN_API_VERSION_MINOR;
 
 }
 
-int watchdog_pi::GetPlugInVersionMajor()
+int burton_pi::GetPlugInVersionMajor()
 {
 
     return PLUGIN_VERSION_MAJOR;
 
 }
 
-int watchdog_pi::GetPlugInVersionMinor()
+int burton_pi::GetPlugInVersionMinor()
 {
 
     return PLUGIN_VERSION_MINOR;
 
 }
 
-wxBitmap *watchdog_pi::GetPlugInBitmap()
+wxBitmap *burton_pi::GetPlugInBitmap()
 {
-    return new wxBitmap(_img_watchdog->ConvertToImage().Copy());
+    return new wxBitmap(_img_burton->ConvertToImage().Copy());
 }
 
-wxString watchdog_pi::GetCommonName()
+wxString burton_pi::GetCommonName()
 {
 
-    // return _("Watchdog");
+    // return _("Burton");
 	return _T(PLUGIN_COMMON_NAME);
 
 }
 
-wxString watchdog_pi::GetShortDescription()
+wxString burton_pi::GetShortDescription()
 {
     return _(PLUGIN_SHORT_DESCRIPTION);
 }
 
-wxString watchdog_pi::GetLongDescription()
+wxString burton_pi::GetLongDescription()
 {
    return _(PLUGIN_LONG_DESCRIPTION);
 }
 
-int watchdog_pi::GetToolbarToolCount(void)
+int burton_pi::GetToolbarToolCount(void)
 {
     return 1;
 }
 
-void watchdog_pi::ShowPreferencesDialog( wxWindow* parent )
+void burton_pi::ShowPreferencesDialog( wxWindow* parent )
 {
     //dlgShow = false;
     if( NULL == m_PropertiesDialog )
-        m_PropertiesDialog = new WatchdogPropertiesDialog( parent );
+        m_PropertiesDialog = new BurtonPropertiesDialog( parent );
     
     m_PropertiesDialog->ShowModal();
     
@@ -275,60 +275,60 @@ void watchdog_pi::ShowPreferencesDialog( wxWindow* parent )
     
 }
 
-void watchdog_pi::SetColorScheme(PI_ColorScheme cs)
+void burton_pi::SetColorScheme(PI_ColorScheme cs)
 {
-    if (NULL == m_WatchdogDialog)
+    if (NULL == m_BurtonDialog)
         return;
 
-    DimeWindow(m_WatchdogDialog);
+    DimeWindow(m_BurtonDialog);
 }
 
-void watchdog_pi::RearrangeWindow()
+void burton_pi::RearrangeWindow()
 {
-    if (NULL == m_WatchdogDialog)
+    if (NULL == m_BurtonDialog)
         return;
 
     SetColorScheme(PI_ColorScheme());
     
-    m_WatchdogDialog->Fit();
+    m_BurtonDialog->Fit();
 }
 
-void watchdog_pi::OnToolbarToolCallback(int id)
+void burton_pi::OnToolbarToolCallback(int id)
 {
-    if(!m_WatchdogDialog)
+    if(!m_BurtonDialog)
     {
-        m_WatchdogDialog = new WatchdogDialog(*this, GetOCPNCanvasWindow());
-        m_ConfigurationDialog = new ConfigurationDialog(*this, m_WatchdogDialog);
+        m_BurtonDialog = new BurtonDialog(*this, GetOCPNCanvasWindow());
+        m_ConfigurationDialog = new ConfigurationDialog(*this, m_BurtonDialog);
 
         wxIcon icon;
-        icon.CopyFromBitmap(*_img_watchdog);
-        m_WatchdogDialog->SetIcon(icon);
+        icon.CopyFromBitmap(*_img_burton);
+        m_BurtonDialog->SetIcon(icon);
         m_ConfigurationDialog->SetIcon(icon);
     }
 
-    m_WatchdogDialog->Show(!m_WatchdogDialog->IsShown());
-    if(m_WatchdogDialog->IsShown()) {
-        m_bWatchdogDialogShown = true;
-        m_WatchdogDialog->UpdateAlarms();
+    m_BurtonDialog->Show(!m_BurtonDialog->IsShown());
+    if(m_BurtonDialog->IsShown()) {
+        m_bBurtonDialogShown = true;
+        m_BurtonDialog->UpdateAlarms();
     }
 
-    wxPoint p = m_WatchdogDialog->GetPosition();
-    m_WatchdogDialog->Move(0, 0);        // workaround for gtk autocentre dialog behavior
-    m_WatchdogDialog->Move(p);
+    wxPoint p = m_BurtonDialog->GetPosition();
+    m_BurtonDialog->Move(0, 0);        // workaround for gtk autocentre dialog behavior
+    m_BurtonDialog->Move(p);
 }
 
-void watchdog_pi::OnContextMenuItemCallback(int id)
+void burton_pi::OnContextMenuItemCallback(int id)
 {
 }
 
-bool watchdog_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
+bool burton_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
 {
     wdDC odc(dc);
     Render(odc, *vp);
     return true;
 }
 
-bool watchdog_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
+bool burton_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
 {
     wdDC odc;
     glEnable( GL_BLEND );
@@ -337,19 +337,19 @@ bool watchdog_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
     return true;
 }
 
-void watchdog_pi::Render(wdDC &dc, PlugIn_ViewPort &vp)
+void burton_pi::Render(wdDC &dc, PlugIn_ViewPort &vp)
 {
-    if((!m_WatchdogDialog || !m_WatchdogDialog->IsShown()) && (m_iEnableType == ID_ALARM_NEVER || m_iEnableType == ID_ALARM_VISIBLE))
+    if((!m_BurtonDialog || !m_BurtonDialog->IsShown()) && (m_iEnableType == ID_ALARM_NEVER || m_iEnableType == ID_ALARM_VISIBLE))
         return;
-    if(m_iEnableType == ID_ALARM_VISIBLE && !m_bWatchdogDialogShown)
+    if(m_iEnableType == ID_ALARM_VISIBLE && !m_bBurtonDialogShown)
         return;
-    if(m_iEnableType == ID_ALARM_ONCE && !m_bWatchdogDialogShown)
+    if(m_iEnableType == ID_ALARM_ONCE && !m_bBurtonDialogShown)
         return;
 
     Alarm::RenderAll(dc, vp);
 }
 
-void watchdog_pi::OnTimer( wxTimerEvent & )
+void burton_pi::OnTimer( wxTimerEvent & )
 {
     /* calculate course and speed over ground from gps */
     double dt = m_lastfix.FixTime - m_lasttimerfix.FixTime;
@@ -381,7 +381,7 @@ void watchdog_pi::OnTimer( wxTimerEvent & )
     m_lasttimerfix = m_lastfix;
 }
 
-void watchdog_pi::SetCursorLatLon(double lat, double lon)
+void burton_pi::SetCursorLatLon(double lat, double lon)
 {
     wxPoint pos = wxGetMouseState().GetPosition();
     if(pos == m_cursor_position)
@@ -390,17 +390,17 @@ void watchdog_pi::SetCursorLatLon(double lat, double lon)
     m_cursor_time = wxDateTime::Now();
 }
 
-void watchdog_pi::SetNMEASentence(wxString &sentence)
+void burton_pi::SetNMEASentence(wxString &sentence)
 {
     Alarm::NMEAStringAll(sentence);
 }
 
-void watchdog_pi::SetPositionFixEx(PlugIn_Position_Fix_Ex &pfix)
+void burton_pi::SetPositionFixEx(PlugIn_Position_Fix_Ex &pfix)
 {
     m_lastfix = pfix;
 }
 
-void watchdog_pi::SetPluginMessage(wxString &message_id, wxString &message_body)
+void burton_pi::SetPluginMessage(wxString &message_id, wxString &message_body)
 {
     // construct the JSON root object
     Json::Value  root;
@@ -412,7 +412,7 @@ void watchdog_pi::SetPluginMessage(wxString &message_id, wxString &message_body)
         // now read the JSON text and store it in the 'root' structure
         // check for errors before retreiving values...
         if ( !reader.parse( (std::string)message_body, root ) ) {
-            wxLogMessage(wxString("watchdog_pi: Error parsing JSON message: ") + reader.getFormattedErrorMessages() + " : " + message_body );
+            wxLogMessage(wxString("burton_pi: Error parsing JSON message: ") + reader.getFormattedErrorMessages() + " : " + message_body );
             return;
         }
         
@@ -491,7 +491,7 @@ void watchdog_pi::SetPluginMessage(wxString &message_id, wxString &message_body)
         return;
     } else if(message_id == "AIS") {
         if(!reader.parse( (std::string)message_body, root )) {
-            wxLogMessage(wxString("watchdog_pi: Error parsing AIS JSON message: ") + reader.getFormattedErrorMessages() + " : " + message_body );
+            wxLogMessage(wxString("burton_pi: Error parsing AIS JSON message: ") + reader.getFormattedErrorMessages() + " : " + message_body );
             return;
         }
         if(!root.isMember( "Source")) {
@@ -583,12 +583,12 @@ void watchdog_pi::SetPluginMessage(wxString &message_id, wxString &message_body)
 }
 
 
-void watchdog_pi::ShowConfigurationDialog( wxWindow* )
+void burton_pi::ShowConfigurationDialog( wxWindow* )
 {
     m_ConfigurationDialog->Show();
 }
 
-wxString watchdog_pi::StandardPath()
+wxString burton_pi::StandardPath()
 {
     wxStandardPathsBase& std_path = wxStandardPathsBase::Get();
     wxString s = wxFileName::GetPathSeparator();
@@ -605,7 +605,7 @@ wxString watchdog_pi::StandardPath()
     if (!wxDirExists(stdPath))
       wxMkdir(stdPath);
 
-    stdPath += s + "watchdog";
+    stdPath += s + "burton";
 
 #ifdef __WXOSX__
     // Compatibility with pre-OCPN-4.2; move config dir to
@@ -624,7 +624,7 @@ wxString watchdog_pi::StandardPath()
     return stdPath;
 }
 
-double watchdog_pi::Declination()
+double burton_pi::Declination()
 {
     if(!m_declinationTime.IsValid() || (wxDateTime::Now() - m_declinationTime).GetSeconds() > 1200)
         SendPluginMessage("WMM_VARIATION_BOAT_REQUEST", "");

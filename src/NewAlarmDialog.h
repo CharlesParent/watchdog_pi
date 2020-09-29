@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Project:  OpenCPN
- * Purpose:  watchdog Plugin
+ * Purpose:  burton Plugin
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
@@ -24,7 +24,7 @@
  ***************************************************************************
  */
 
-#include "WatchdogUI.h"
+#include "BurtonUI.h"
 
 class NewAlarmDialog : public NewAlarmDialogBase
 {

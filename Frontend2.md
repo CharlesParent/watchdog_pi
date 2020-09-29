@@ -45,8 +45,8 @@ Copy the following directories and files from testplugin_pi to the same location
 - testplugin_pi/cmake
 - testplugin_pi/buildosx
 - testplugin_pi/mingw
-- testplugin_pi/extinclude  (JSON Validation - only Ocpn_draw, watchdog, weather_routing)
-- testplugin_pi/extsrc  (JSON Validation - only Ocpn_draw, watchdog, weather_routing)
+- testplugin_pi/extinclude  (JSON Validation - only Ocpn_draw, burton, weather_routing)
+- testplugin_pi/extsrc  (JSON Validation - only Ocpn_draw, burton, weather_routing)
 
 #### Files
 Review and Compare these files, deployment to Cloudsmith is required.

@@ -14,7 +14,7 @@ message(STATUS "Processing PluginGL.cmake")
 #          )
 
 
-# changed for watchdog
+# changed for burton
 SET(SRC_PLUGINGL
           src/GL/gl.h  
           src/GL/glext.h
@@ -25,9 +25,9 @@ if(UNIX)
 endif(UNIX)
 
 message(STATUS "PROJECT_SOURCE_DIR: ${PROJECT_SOURCE_DIR}")
-INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/GL)   #added for Watchdog
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/GL)   #added for Burton
 
 ADD_LIBRARY(${PACKAGE_NAME}_LIB_PLUGINGL STATIC ${SRC_PLUGINGL})
 TARGET_LINK_LIBRARIES( ${PACKAGE_NAME} ${PACKAGE_NAME}_LIB_PLUGINGL )
-message(STATUS "Add Library ${PACKAGE_NAME}_LIB_PLUGINGL")  #added for Watchdog
+message(STATUS "Add Library ${PACKAGE_NAME}_LIB_PLUGINGL")  #added for Burton
 

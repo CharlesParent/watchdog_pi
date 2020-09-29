@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Project:  OpenCPN
- * Purpose:  watchdog Plugin
+ * Purpose:  burton Plugin
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
@@ -26,8 +26,8 @@
 
 #include <wx/imaglist.h>
 
-#include "watchdog_pi.h"
-#include "WatchdogDialog.h"
+#include "burton_pi.h"
+#include "BurtonDialog.h"
 #include "NewAlarmDialog.h"
 #include "EditAlarmDialog.h"
 
@@ -88,12 +88,12 @@ const char * check_xpm[] = {
 
 enum AlarmStatus { ALARM_ENABLED, ALARM_TYPE, ALARM_STATUS, ALARM_COUNT };
 
-WatchdogDialog::WatchdogDialog( watchdog_pi &_watchdog_pi, wxWindow* parent)
-    : WatchdogDialogBase( parent ), m_watchdog_pi(_watchdog_pi)
+BurtonDialog::BurtonDialog( burton_pi &_burton_pi, wxWindow* parent)
+    : BurtonDialogBase( parent ), m_burton_pi(_burton_pi)
 {
     wxFileConfig *pConf = GetOCPNConfigObject();
 
-    pConf->SetPath ( _T( "/Settings/Watchdog" ) );
+    pConf->SetPath ( _T( "/Settings/Burton" ) );
 
 #ifdef __WXGTK__
     Move(0, 0);        // workaround for gtk autocentre dialog behavior
@@ -123,10 +123,10 @@ WatchdogDialog::WatchdogDialog( watchdog_pi &_watchdog_pi, wxWindow* parent)
     this->SetSizeHints( 250, 100 );
 }
 
-WatchdogDialog::~WatchdogDialog()
+BurtonDialog::~BurtonDialog()
 {
     wxFileConfig *pConf = GetOCPNConfigObject();
-    pConf->SetPath ( _T ( "/Settings/Watchdog" ) );
+    pConf->SetPath ( _T ( "/Settings/Burton" ) );
 
     pConf->Write ( _T ( "DialogPosX" ), GetPosition().x );
     pConf->Write ( _T ( "DialogPosY" ), GetPosition().y );
@@ -134,7 +134,7 @@ WatchdogDialog::~WatchdogDialog()
     pConf->Write ( _T ( "DialogHeight" ), GetSize().y);
 }
 
-void WatchdogDialog::UpdateAlarms()
+void BurtonDialog::UpdateAlarms()
 {
     while((int)Alarm::s_Alarms.size() > m_lStatus->GetItemCount()) {
         wxListItem item;
@@ -148,7 +148,7 @@ void WatchdogDialog::UpdateAlarms()
         UpdateStatus(i);
 }
 
-void WatchdogDialog::UpdateStatus(int index)
+void BurtonDialog::UpdateStatus(int index)
 {
     Alarm *alarm = Alarm::s_Alarms[index];
     m_lStatus->SetItemImage(index, alarm->m_bEnabled ? 1 : 0);
@@ -167,7 +167,7 @@ void WatchdogDialog::UpdateStatus(int index)
     m_lStatus->SetColumnWidth(ALARM_COUNT, wxLIST_AUTOSIZE);
 }
 
-void WatchdogDialog::OnLeftDown( wxMouseEvent& event )
+void BurtonDialog::OnLeftDown( wxMouseEvent& event )
 {
     if(event.GetX() >= m_lStatus->GetColumnWidth(0))
         return;
@@ -187,7 +187,7 @@ void WatchdogDialog::OnLeftDown( wxMouseEvent& event )
     UpdateStatus(index);
 }
 
-void WatchdogDialog::OnRightDown( wxMouseEvent& event )
+void BurtonDialog::OnRightDown( wxMouseEvent& event )
 {
     wxPoint pos = event.GetPosition();
     int flags = 0;
@@ -199,10 +199,10 @@ void WatchdogDialog::OnRightDown( wxMouseEvent& event )
     m_Reset->Enable(index >= 0);
     m_Delete->Enable(index >= 0);
     
-    WatchdogDialogBaseOnContextMenu(event);
+    BurtonDialogBaseOnContextMenu(event);
 }
 
-void WatchdogDialog::OnDoubleClick( wxMouseEvent& event )
+void BurtonDialog::OnDoubleClick( wxMouseEvent& event )
 {
     if(event.GetX() < m_lStatus->GetColumnWidth(0))
         return;
@@ -223,7 +223,7 @@ void WatchdogDialog::OnDoubleClick( wxMouseEvent& event )
         dlg.Save();
 }
 
-void WatchdogDialog::OnNew( wxCommandEvent& event )
+void BurtonDialog::OnNew( wxCommandEvent& event )
 {
     NewAlarmDialog dlg(this);
     if(dlg.ShowModal() == wxID_CANCEL)
@@ -241,7 +241,7 @@ void WatchdogDialog::OnNew( wxCommandEvent& event )
         delete alarm;
 }
 
-void WatchdogDialog::OnEdit( wxCommandEvent& event )
+void BurtonDialog::OnEdit( wxCommandEvent& event )
 {
     EditAlarmDialog dlg(this, m_menualarm);
     if(dlg.ShowModal() == wxID_OK)
@@ -249,13 +249,13 @@ void WatchdogDialog::OnEdit( wxCommandEvent& event )
     UpdateAlarms();
 }
 
-void WatchdogDialog::OnReset( wxCommandEvent& event )
+void BurtonDialog::OnReset( wxCommandEvent& event )
 {
     m_menualarm->Reset();
     UpdateAlarms();
 }
 
-void WatchdogDialog::OnDelete( wxCommandEvent& event )
+void BurtonDialog::OnDelete( wxCommandEvent& event )
 {
     std::vector<Alarm*>::iterator it = Alarm::s_Alarms.begin();
     while(*it != m_menualarm)
@@ -265,19 +265,19 @@ void WatchdogDialog::OnDelete( wxCommandEvent& event )
     UpdateAlarms();
 }
 
-void WatchdogDialog::OnResetAll( wxCommandEvent& event )
+void BurtonDialog::OnResetAll( wxCommandEvent& event )
 {
     Alarm::ResetAll();
     UpdateAlarms();
 }
 
-void WatchdogDialog::OnDeleteAll( wxCommandEvent& event )
+void BurtonDialog::OnDeleteAll( wxCommandEvent& event )
 {
     Alarm::DeleteAll();
     UpdateAlarms();
 }
 
-void WatchdogDialog::OnConfiguration( wxCommandEvent& event )
+void BurtonDialog::OnConfiguration( wxCommandEvent& event )
 {
-    m_watchdog_pi.ShowConfigurationDialog( this );
+    m_burton_pi.ShowConfigurationDialog( this );
 }

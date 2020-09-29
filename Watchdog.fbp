@@ -11,12 +11,12 @@
         <property name="embedded_files_path">res</property>
         <property name="encoding">UTF-8</property>
         <property name="event_generation">connect</property>
-        <property name="file">WatchdogUI</property>
+        <property name="file">BurtonUI</property>
         <property name="first_id">1000</property>
         <property name="help_provider">none</property>
         <property name="indent_with_spaces" />
         <property name="internationalize">1</property>
-        <property name="name">watchdog</property>
+        <property name="name">burton</property>
         <property name="namespace" />
         <property name="path">./src</property>
         <property name="precompiled_header" />
@@ -43,7 +43,7 @@
             <property name="id">wxID_ANY</property>
             <property name="maximum_size">-1,-1</property>
             <property name="minimum_size">-1,-1</property>
-            <property name="name">WatchdogDialogBase</property>
+            <property name="name">BurtonDialogBase</property>
             <property name="pos" />
             <property name="size">-1,-1</property>
             <property name="style">wxCAPTION|wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER</property>
@@ -338,12 +338,12 @@
             <property name="id">wxID_ANY</property>
             <property name="maximum_size" />
             <property name="minimum_size" />
-            <property name="name">WatchdogPropertiesDialogBase</property>
+            <property name="name">BurtonPropertiesDialogBase</property>
             <property name="pos" />
             <property name="size" />
             <property name="style">wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxSTAY_ON_TOP</property>
             <property name="subclass" />
-            <property name="title">About Watchdog Properties</property>
+            <property name="title">About Burton Properties</property>
             <property name="tooltip" />
             <property name="window_extra_style" />
             <property name="window_name" />
@@ -1442,7 +1442,7 @@
                         <property name="gripper">0</property>
                         <property name="hidden">0</property>
                         <property name="id">wxID_ANY</property>
-                        <property name="label">Please report problems using FlySpray at:&#x0A;http://willkamp.com/opencpn/flyspray/index.php?project=0&amp;do=index&amp;switch=1&#x0A;&#x0A;or&#x0A;&#x0A;at the OpenCPN forum:&#x0A;http://www.cruisersforum.com/forums/f134&#x0A;&#x0A;or&#x0A;&#x0A;Raise an issue in GIT at:&#x0A;https://github.com/seandepagnier/watchdog_pi/issues&#x0A;</property>
+                        <property name="label">Please report problems using FlySpray at:&#x0A;http://willkamp.com/opencpn/flyspray/index.php?project=0&amp;do=index&amp;switch=1&#x0A;&#x0A;or&#x0A;&#x0A;at the OpenCPN forum:&#x0A;http://www.cruisersforum.com/forums/f134&#x0A;&#x0A;or&#x0A;&#x0A;Raise an issue in GIT at:&#x0A;https://github.com/seandepagnier/burton_pi/issues&#x0A;</property>
                         <property name="max_size" />
                         <property name="maximize_button">0</property>
                         <property name="maximum_size" />
@@ -1654,7 +1654,7 @@
                         <property name="window_extra_style" />
                         <property name="window_name" />
                         <property name="window_style" />
-                        <event name="OnButtonClick">OnWatchdogPropertiesOKClick</event>
+                        <event name="OnButtonClick">OnBurtonPropertiesOKClick</event>
                         <event name="OnChar" />
                         <event name="OnEnterWindow" />
                         <event name="OnEraseBackground" />
@@ -1703,7 +1703,7 @@
             <property name="size">-1,-1</property>
             <property name="style">wxCAPTION|wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER</property>
             <property name="subclass" />
-            <property name="title">Watchdog Configuration</property>
+            <property name="title">Burton Configuration</property>
             <property name="tooltip" />
             <property name="window_extra_style" />
             <property name="window_name" />
@@ -1905,7 +1905,7 @@
                                         <property name="gripper">0</property>
                                         <property name="hidden">0</property>
                                         <property name="id">wxID_ANY</property>
-                                        <property name="label">Enabled after first time Watchdog Dialog is visible</property>
+                                        <property name="label">Enabled after first time Burton Dialog is visible</property>
                                         <property name="max_size" />
                                         <property name="maximize_button">0</property>
                                         <property name="maximum_size" />
@@ -1993,7 +1993,7 @@
                                         <property name="gripper">0</property>
                                         <property name="hidden">0</property>
                                         <property name="id">wxID_ANY</property>
-                                        <property name="label">Enabled only if Watchdog Dialog is visible</property>
+                                        <property name="label">Enabled only if Burton Dialog is visible</property>
                                         <property name="max_size" />
                                         <property name="maximize_button">0</property>
                                         <property name="maximum_size" />

@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Project:  OpenCPN
- * Purpose:  watchdog Plugin
+ * Purpose:  burton Plugin
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
@@ -28,8 +28,8 @@
 #include "json/json.h"
 
 #include "EditAlarmDialog.h"
-#include "WatchdogUI.h"
-#include "watchdog_pi.h"
+#include "BurtonUI.h"
+#include "burton_pi.h"
 
 #include "WindPanel.h"
 #include "WeatherPanel.h"
@@ -103,7 +103,7 @@ Normally a sound is played, however you can execute any command you like, eg:  \
 Messagebox may be useful to interrupt other applications (like a movie player)\n\
 Automatically Reset will reset the alarm once it is no longer triggered, and it may \
 be triggered again later."),
-                         _("Watchdog Information"), wxOK | wxICON_INFORMATION);
+                         _("Burton Information"), wxOK | wxICON_INFORMATION);
     mdlg.ShowModal();
 }
 
@@ -144,8 +144,8 @@ void BoundaryPanel::OnGetBoundaryGUID( wxCommandEvent& )
     jMsg["Type"] = "Request";
     jMsg["Msg"] = "FindPointInAnyBoundary";
     jMsg["MsgId"] = "GetGUID";
-    jMsg["lat"] = g_watchdog_pi->LastFix().Lat;
-    jMsg["lon"] = g_watchdog_pi->LastFix().Lon;
+    jMsg["lat"] = g_burton_pi->LastFix().Lat;
+    jMsg["lon"] = g_burton_pi->LastFix().Lon;
     jMsg["BoundaryType"] = "Any";
     g_ReceivedBoundaryGUIDMessage = wxEmptyString;
     SendPluginMessage( "OCPN_DRAW_PI", writer.write( jMsg ));
@@ -204,7 +204,7 @@ void BoundaryPanel::OnBoundaryGUIDKillFocus( wxFocusEvent& event )
                 } else {
                     wxString l_s = " " + wxString(_("Error!")) + "\n" 
                     + _("GUID") + ": " + m_tBoundaryGUID->GetValue() + _(" does not exist");
-                    wxMessageDialog mdlg(GetOCPNCanvasWindow(), l_s, _("Watchdog"), wxOK | wxICON_WARNING);
+                    wxMessageDialog mdlg(GetOCPNCanvasWindow(), l_s, _("Burton"), wxOK | wxICON_WARNING);
                     mdlg.ShowModal();
                     m_tBoundaryGUID->SetFocus();
                 }
@@ -229,7 +229,7 @@ void BoundaryPanel::OnBoundaryGUIDKillFocus( wxFocusEvent& event )
             } else {
                 wxString l_s = " " + wxString(_("Error!")) + "\n" 
                 + _("GUID") + ": " + m_tBoundaryGUID->GetValue() + _(" does not exist");
-                wxMessageDialog mdlg(GetOCPNCanvasWindow(), l_s, _("Watchdog"), wxOK | wxICON_WARNING);
+                wxMessageDialog mdlg(GetOCPNCanvasWindow(), l_s, _("Burton"), wxOK | wxICON_WARNING);
                 mdlg.ShowModal();
                 m_tBoundaryGUID->SetFocus();
             }
@@ -280,7 +280,7 @@ void BoundaryPanel::OnGuardZoneGUIDKillFocus( wxFocusEvent& event )
                 } else {
                     wxString l_s = " " + wxString(_("Error!")) + "\n" 
                     + _("GUID") + ": " + m_tGuardZoneGUID->GetValue() + _(" does not exist");
-                    wxMessageDialog mdlg(GetOCPNCanvasWindow(), l_s, _("Watchdog"), wxOK | wxICON_WARNING);
+                    wxMessageDialog mdlg(GetOCPNCanvasWindow(), l_s, _("Burton"), wxOK | wxICON_WARNING);
                     mdlg.ShowModal();
                     m_tGuardZoneGUID->SetFocus();
                 }
@@ -304,7 +304,7 @@ void BoundaryPanel::OnGuardZoneGUIDKillFocus( wxFocusEvent& event )
         } else {
             wxString l_s = " " + wxString(_("Error!")) + "\n" 
                     + _("GUID") + ": " + m_tGuardZoneGUID->GetValue() + _(" does not exist");
-            wxMessageDialog mdlg(GetOCPNCanvasWindow(), l_s, _("Watchdog"), wxOK | wxICON_WARNING);
+            wxMessageDialog mdlg(GetOCPNCanvasWindow(), l_s, _("Burton"), wxOK | wxICON_WARNING);
             mdlg.ShowModal();
             m_tGuardZoneGUID->SetFocus();
         }
@@ -332,13 +332,13 @@ void BoundaryPanel::OnRadioButton(wxCommandEvent& event )
 
 void AnchorPanel::OnSyncToBoat( wxCommandEvent& )
 {
-    m_tLatitude->SetValue(wxString::Format("%f", g_watchdog_pi->LastFix().Lat));
-    m_tLongitude->SetValue(wxString::Format("%f", g_watchdog_pi->LastFix().Lon));
+    m_tLatitude->SetValue(wxString::Format("%f", g_burton_pi->LastFix().Lat));
+    m_tLongitude->SetValue(wxString::Format("%f", g_burton_pi->LastFix().Lon));
 }
 
 void CoursePanel::OnCurrentCourse( wxCommandEvent& )
 {
-    m_sCourse->SetValue(g_watchdog_pi->m_cog);
+    m_sCourse->SetValue(g_burton_pi->m_cog);
 }
 
 void WindPanel::OnType( wxCommandEvent& )
@@ -354,7 +354,7 @@ void WindPanel::OnAboutWind( wxCommandEvent& )
 1) Apparent - measured from moving boat (requires only wind sensors)\n\
 2) True Relative - wind would feel like if boat stopped (requires wind sensors + gps)\n\
 3) True Absolute - wind would feel if boat stopped and faced north (requires wind sensors + gps + compass)");
-    wxMessageDialog mdlg(GetOCPNCanvasWindow(), l_s, _("Watchdog"), wxOK | wxICON_WARNING);
+    wxMessageDialog mdlg(GetOCPNCanvasWindow(), l_s, _("Burton"), wxOK | wxICON_WARNING);
     mdlg.ShowModal();
 }
 
@@ -405,6 +405,6 @@ No Rudder Feedback - optional Rudder feedback sensor not working\n\
 No Motor Temperature - optional motor temperature sensor not working\n\
 Driver Timeout - Motor not drawing power: motor not connected to controller\n");
 
-    wxMessageDialog mdlg(GetOCPNCanvasWindow(), l_s, _("Watchdog"), wxOK | wxICON_INFORMATION);
+    wxMessageDialog mdlg(GetOCPNCanvasWindow(), l_s, _("Burton"), wxOK | wxICON_INFORMATION);
     mdlg.ShowModal();
 }

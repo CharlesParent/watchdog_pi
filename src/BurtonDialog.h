@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Project:  OpenCPN
- * Purpose:  watchdog Plugin
+ * Purpose:  burton Plugin
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
@@ -24,15 +24,15 @@
  ***************************************************************************
  */
 
-#include "WatchdogUI.h"
+#include "BurtonUI.h"
 
-class watchdog_pi;
+class burton_pi;
 
-class WatchdogDialog: public WatchdogDialogBase
+class BurtonDialog: public BurtonDialogBase
 {
 public:
-    WatchdogDialog( watchdog_pi &_watchdog_pi, wxWindow* parent);
-    ~WatchdogDialog();
+    BurtonDialog( burton_pi &_burton_pi, wxWindow* parent);
+    ~BurtonDialog();
 
     void UpdateAlarms();
     void UpdateStatus(int index);
@@ -49,6 +49,6 @@ public:
     void OnConfiguration( wxCommandEvent& event );
     
 private:
-    watchdog_pi &m_watchdog_pi;
+    burton_pi &m_burton_pi;
     Alarm *m_menualarm;
 };

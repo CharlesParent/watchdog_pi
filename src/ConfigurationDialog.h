@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Project:  OpenCPN
- * Purpose:  watchdog Plugin
+ * Purpose:  burton Plugin
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
@@ -24,14 +24,14 @@
  ***************************************************************************
  */
 
-#include "WatchdogUI.h"
+#include "BurtonUI.h"
 
-class watchdog_pi;
+class burton_pi;
 
 class ConfigurationDialog : public ConfigurationDialogBase
 {
 public:
-    ConfigurationDialog( watchdog_pi &_watchdog_pi, wxWindow* parent);
+    ConfigurationDialog( burton_pi &_burton_pi, wxWindow* parent);
 
     void OnEnabled( wxCommandEvent& event );
     void OnFont( wxFontPickerEvent& event );
@@ -39,5 +39,5 @@ public:
 private:
     void OnInformation( wxCommandEvent& event );
 
-    watchdog_pi &m_watchdog_pi;
+    burton_pi &m_burton_pi;
 };

@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Project:  OpenCPN
- * Purpose:  watchdog Plugin
+ * Purpose:  burton Plugin
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
@@ -24,7 +24,7 @@
  ***************************************************************************
  */
 
-#include "watchdog_pi.h"
+#include "burton_pi.h"
 #include "NewAlarmDialog.h"
 
 NewAlarmDialog::NewAlarmDialog(wxWindow* parent)

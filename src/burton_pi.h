@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Project:  OpenCPN
- * Purpose:  watchdog Plugin
+ * Purpose:  burton Plugin
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
@@ -79,9 +79,9 @@ double heading_resolve(double degrees, double offset=0);
 #include "Alarm.h"
 
 class wdDC;
-class WatchdogDialog;
+class BurtonDialog;
 class ConfigurationDialog;
-class WatchdogPropertiesDialog;
+class BurtonPropertiesDialog;
 
 enum {
     ID_ALARM_NEVER = 0,
@@ -90,11 +90,11 @@ enum {
     ID_ALARM_VISIBLE
 };
 
-class watchdog_pi : public wxEvtHandler, public opencpn_plugin_116
+class burton_pi : public wxEvtHandler, public opencpn_plugin_116
 {
 public:
 
-    watchdog_pi(void *ppimgr);
+    burton_pi(void *ppimgr);
 
       int Init(void);
       bool DeInit(void);
@@ -135,10 +135,10 @@ public:
 
       wxDateTime m_ValidFixTime;
       wxDateTime m_cursor_time;
-      WatchdogDialog   *m_WatchdogDialog;
+      BurtonDialog   *m_BurtonDialog;
       
       int       m_iEnableType;
-      bool      m_bWatchdogDialogShown;
+      bool      m_bBurtonDialogShown;
       
 protected:
       wxPoint m_cursor_position;
@@ -152,7 +152,7 @@ private:
       void SetPluginMessage(wxString &message_id, wxString &message_body);
 
       ConfigurationDialog *m_ConfigurationDialog;
-      WatchdogPropertiesDialog *m_PropertiesDialog;
+      BurtonPropertiesDialog *m_PropertiesDialog;
       int               m_leftclick_tool_id;
 
       void              RearrangeWindow();
@@ -163,6 +163,6 @@ private:
       wxDateTime m_declinationTime;
 };
 
-extern watchdog_pi *g_watchdog_pi;
+extern burton_pi *g_burton_pi;
 
 #endif

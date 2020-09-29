@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: crowdin.com\n"
 "X-Crowdin-Project: opencpn\n"
 "X-Crowdin-Language: et\n"
-"X-Crowdin-File: /plugins/watchdog_pi/po/watchdog_pi.pot\n"
+"X-Crowdin-File: /plugins/burton_pi/po/burton_pi.pot\n"
 
 #: src/Alarm.cpp:54
 msgid "landfall alarm without gshhs data"
@@ -84,16 +84,16 @@ msgstr "Aeg piirini"
 msgid "Boundary Distance"
 msgstr "Vehmaa piirini"
 
-#: src/Alarm.cpp:312 src/WatchdogUI.cpp:603
+#: src/Alarm.cpp:312 src/BurtonUI.cpp:603
 msgid "Inclusion Alarm"
 msgstr "Kaasatuse häire"
 
 #: src/Alarm.cpp:313 src/Alarm.cpp:1028 src/Alarm.cpp:1030
-#: src/watchdog_pi.cpp:582
+#: src/burton_pi.cpp:582
 msgid "Guard Zone"
 msgstr "Valvetsoon"
 
-#: src/Alarm.cpp:324 src/Alarm.cpp:916 src/Alarm.cpp:956 src/WatchdogUI.cpp:606
+#: src/Alarm.cpp:324 src/Alarm.cpp:916 src/Alarm.cpp:956 src/BurtonUI.cpp:606
 msgid "Boundary GUID"
 msgstr "Piiri GUID"
 
@@ -101,7 +101,7 @@ msgstr "Piiri GUID"
 msgid "Boundary Name"
 msgstr "Piiri nimi"
 
-#: src/Alarm.cpp:330 src/WatchdogUI.cpp:580
+#: src/Alarm.cpp:330 src/BurtonUI.cpp:580
 msgid "Guard Zone GUID"
 msgstr "Valvetsooni GUID"
 
@@ -181,10 +181,10 @@ msgstr "kehtetu piiri režiim"
 msgid "Failed to execute command: "
 msgstr "Ei õnnestunud käivitada käsku:"
 
-#: src/Alarm.cpp:1223 src/Alarm.cpp:2175 src/watchdog_pi.cpp:146
-#: src/watchdog_pi.cpp:232
-msgid "Watchdog"
-msgstr "Watchdog"
+#: src/Alarm.cpp:1223 src/Alarm.cpp:2175 src/burton_pi.cpp:146
+#: src/burton_pi.cpp:232
+msgid "Burton"
+msgstr "Burton"
 
 #: src/Alarm.cpp:1231 src/Alarm.cpp:1244 src/Alarm.cpp:1260 src/Alarm.cpp:1271
 #: src/Alarm.cpp:1292 src/Alarm.cpp:2181
@@ -257,7 +257,7 @@ msgstr "Ankur"
 msgid "radius"
 msgstr "raadius"
 
-#: src/Alarm.cpp:1687 src/WatchdogUI.cpp:841
+#: src/Alarm.cpp:1687 src/BurtonUI.cpp:841
 msgid "meters"
 msgstr "meetrit"
 
@@ -273,11 +273,11 @@ msgstr "meetrit"
 msgid "Course"
 msgstr "Kurss"
 
-#: src/Alarm.cpp:1798 src/Alarm.cpp:1822 src/WatchdogUI.cpp:887
+#: src/Alarm.cpp:1798 src/Alarm.cpp:1822 src/BurtonUI.cpp:887
 msgid "Port"
 msgstr "pakpoordis"
 
-#: src/Alarm.cpp:1799 src/Alarm.cpp:1820 src/WatchdogUI.cpp:887
+#: src/Alarm.cpp:1799 src/Alarm.cpp:1820 src/BurtonUI.cpp:887
 msgid "Starboard"
 msgstr "Tüürpoord"
 
@@ -321,11 +321,11 @@ msgstr "kehtetu häire tüüp"
 msgid "failed to save"
 msgstr "salvestus nurjus"
 
-#: src/Alarm.cpp:2157 src/WatchdogUI.cpp:364
+#: src/Alarm.cpp:2157 src/BurtonUI.cpp:364
 msgid "Sound"
 msgstr "heli"
 
-#: src/Alarm.cpp:2158 src/WatchdogUI.cpp:370
+#: src/Alarm.cpp:2158 src/BurtonUI.cpp:370
 msgid "Command"
 msgstr "käsk"
 
@@ -341,12 +341,12 @@ msgstr "Korda"
 msgid "Auto Reset"
 msgstr "Autolähestamine"
 
-#: src/Alarm.h:96 src/WatchdogUI.cpp:402
+#: src/Alarm.h:96 src/BurtonUI.cpp:402
 msgid "Test"
 msgstr "Test"
 
-#: src/ConfigurationDialog.cpp:48 src/WatchdogDialog.cpp:108
-#: src/WatchdogUI.cpp:883 src/WatchdogUI.cpp:950
+#: src/ConfigurationDialog.cpp:48 src/BurtonDialog.cpp:108
+#: src/BurtonUI.cpp:883 src/BurtonUI.cpp:950
 msgid "Type"
 msgstr "Tüüp"
 
@@ -369,8 +369,8 @@ msgstr "Enamus häireid peaksid olema iseenesestmõitetavad\n"
 "Automaatne tühistamine algseadistab häire ükskord kui teda enam ei käivitata ning teda võib hiljem jälle valla päästa."
 
 #: src/EditAlarmDialog.cpp:101
-msgid "Watchdog Information"
-msgstr "Watchdog'i info"
+msgid "Burton Information"
+msgstr "Burton'i info"
 
 #: src/EditAlarmDialog.cpp:206 src/EditAlarmDialog.cpp:232
 #: src/EditAlarmDialog.cpp:285 src/EditAlarmDialog.cpp:310
@@ -390,51 +390,51 @@ msgstr "Rannik"
 msgid "Boundary Alarm"
 msgstr "Piiri häire"
 
-#: src/WatchdogDialog.cpp:109
+#: src/BurtonDialog.cpp:109
 msgid "Status"
 msgstr "Olek"
 
-#: src/WatchdogUI.cpp:30
+#: src/BurtonUI.cpp:30
 msgid "Configuration"
 msgstr "Seadistus"
 
-#: src/WatchdogUI.cpp:33
+#: src/BurtonUI.cpp:33
 msgid "Reset"
 msgstr "Algseadista"
 
-#: src/WatchdogUI.cpp:36
+#: src/BurtonUI.cpp:36
 msgid "Close"
 msgstr "Sulge"
 
-#: src/WatchdogUI.cpp:76
+#: src/BurtonUI.cpp:76
 msgid "Name:"
 msgstr "Nimi:"
 
-#: src/WatchdogUI.cpp:84
+#: src/BurtonUI.cpp:84
 msgid "Version:"
 msgstr "Versioon:"
 
-#: src/WatchdogUI.cpp:93
+#: src/BurtonUI.cpp:93
 msgid "Major:"
 msgstr "Peamine:"
 
-#: src/WatchdogUI.cpp:101
+#: src/BurtonUI.cpp:101
 msgid "Minor:"
 msgstr "Vähetähtis:"
 
-#: src/WatchdogUI.cpp:109
+#: src/BurtonUI.cpp:109
 msgid "Patch:"
 msgstr "Uuendus:"
 
-#: src/WatchdogUI.cpp:120
+#: src/BurtonUI.cpp:120
 msgid "Date:"
 msgstr "Kuupäev:"
 
-#: src/WatchdogUI.cpp:128
+#: src/BurtonUI.cpp:128
 msgid "Other:"
 msgstr "Muu:"
 
-#: src/WatchdogUI.cpp:132
+#: src/BurtonUI.cpp:132
 msgid "Please report problems using FlySpray at:\n"
 "https://www.opencpn.org/flyspray/index.php?project=34&do=index&switch=1\n\n"
 "or\n\n"
@@ -442,7 +442,7 @@ msgid "Please report problems using FlySpray at:\n"
 "http://www.cruisersforum.com/forums/f134\n\n"
 "or\n\n"
 "Raise an issue in GIT at:\n"
-"https://github.com/seandepagnier/watchdog_pi/issues\n"
+"https://github.com/seandepagnier/burton_pi/issues\n"
 msgstr "Palun teavita probleemidest kasutades FlySpray'd:\n"
 "https://www.opencpn.org/flyspray/index.php?project=34&do=index&switch=1\n\n"
 "või\n\n"
@@ -450,309 +450,309 @@ msgstr "Palun teavita probleemidest kasutades FlySpray'd:\n"
 "http://www.cruisersforum.com/forums/f134\n\n"
 "või\n\n"
 "Tõstata teema GIT'is:\n"
-"https://github.com/seandepagnier/watchdog_pi/issues\n"
+"https://github.com/seandepagnier/burton_pi/issues\n"
 
-#: src/WatchdogUI.cpp:139
+#: src/BurtonUI.cpp:139
 msgid "&OK"
 msgstr "&OK"
 
-#: src/WatchdogUI.cpp:173
+#: src/BurtonUI.cpp:173
 msgid "General Setup"
 msgstr "Üldine seadistus"
 
-#: src/WatchdogUI.cpp:180
+#: src/BurtonUI.cpp:180
 msgid "Enable All Alarms"
 msgstr "Võimalda kõik häired"
 
-#: src/WatchdogUI.cpp:183
-msgid "Enabled after first time Watchdog Dialog is visible"
-msgstr "Lubatud peale esimest korda kui Watchdog Dialog on nähtav"
+#: src/BurtonUI.cpp:183
+msgid "Enabled after first time Burton Dialog is visible"
+msgstr "Lubatud peale esimest korda kui Burton Dialog on nähtav"
 
-#: src/WatchdogUI.cpp:186
-msgid "Enabled only if Watchdog Dialog is visible"
-msgstr "Lubatud ainult kui Watchdog Dialog on nähtav"
+#: src/BurtonUI.cpp:186
+msgid "Enabled only if Burton Dialog is visible"
+msgstr "Lubatud ainult kui Burton Dialog on nähtav"
 
-#: src/WatchdogUI.cpp:189
+#: src/BurtonUI.cpp:189
 msgid "Disable All Alarms"
 msgstr "Blokeeri kõik häired"
 
-#: src/WatchdogUI.cpp:206
+#: src/BurtonUI.cpp:206
 msgid "Alarms"
 msgstr "Häired"
 
-#: src/WatchdogUI.cpp:220
+#: src/BurtonUI.cpp:220
 msgid "New"
 msgstr "Uus"
 
-#: src/WatchdogUI.cpp:223
+#: src/BurtonUI.cpp:223
 msgid "Edit"
 msgstr "Muuda"
 
-#: src/WatchdogUI.cpp:226
+#: src/BurtonUI.cpp:226
 msgid "Delete"
 msgstr "Kustuta"
 
-#: src/WatchdogUI.cpp:229
+#: src/BurtonUI.cpp:229
 msgid "Delete All"
 msgstr "Kustuta kõik"
 
-#: src/WatchdogUI.cpp:253
+#: src/BurtonUI.cpp:253
 msgid "About Author"
 msgstr "Autorist"
 
-#: src/WatchdogUI.cpp:356
+#: src/BurtonUI.cpp:356
 msgid "Alarm Action"
 msgstr "Tegevus häire korral"
 
-#: src/WatchdogUI.cpp:367
+#: src/BurtonUI.cpp:367
 msgid "Select a file"
 msgstr "Vali fail"
 
-#: src/WatchdogUI.cpp:384
+#: src/BurtonUI.cpp:384
 msgid "Message Box"
 msgstr "teateboks"
 
-#: src/WatchdogUI.cpp:390
+#: src/BurtonUI.cpp:390
 msgid "Repeat Alarm after seconds"
 msgstr "korda häiret sekundi järel"
 
-#: src/WatchdogUI.cpp:396
+#: src/BurtonUI.cpp:396
 msgid "Automatically Reset"
 msgstr "Auto-algseadistus"
 
-#: src/WatchdogUI.cpp:399
+#: src/BurtonUI.cpp:399
 msgid "Graphics Enabled"
 msgstr "Lubatud graafika"
 
-#: src/WatchdogUI.cpp:417
+#: src/BurtonUI.cpp:417
 msgid "Information"
 msgstr "Info"
 
-#: src/WatchdogUI.cpp:464
+#: src/BurtonUI.cpp:464
 msgid "GPS course crosses land in <"
 msgstr "GPS'i kurss lõikub maaga <"
 
-#: src/WatchdogUI.cpp:470 src/WatchdogUI.cpp:539
+#: src/BurtonUI.cpp:470 src/BurtonUI.cpp:539
 msgid "minutes"
 msgstr "minuti pärast"
 
-#: src/WatchdogUI.cpp:482 src/WatchdogUI.cpp:551
+#: src/BurtonUI.cpp:482 src/BurtonUI.cpp:551
 msgid "GPS fix is <"
 msgstr "GPS asokoht on <"
 
-#: src/WatchdogUI.cpp:485 src/WatchdogUI.cpp:554
+#: src/BurtonUI.cpp:485 src/BurtonUI.cpp:554
 msgid "3"
 msgstr "3"
 
-#: src/WatchdogUI.cpp:496
+#: src/BurtonUI.cpp:496
 msgid "nm from coastline\n"
 "(any direction)"
 msgstr "nm rannajoonest\n"
 "(igal suunal)"
 
-#: src/WatchdogUI.cpp:503
+#: src/BurtonUI.cpp:503
 msgid "Graphical overlay for time displays line from boat to location of land crossing"
 msgstr "Aja graafiline ülekate kuvab joont alusest kuni maaga lõikumise kohani"
 
-#: src/WatchdogUI.cpp:507
+#: src/BurtonUI.cpp:507
 msgid "Landfall detection uses gshhs (global heirarchical high-resolution shoreline data.)\n"
 "Consider installing the highest resolution database for best accuracy."
 msgstr "Ranniku tuvastamine kasutab gshhs'i (global heirarchical high-resolution shoreline data.)\n"
 "Kaalutle kõrgeima eraldusvõimega andmebaasi paigaldamist parima täpsuse jaoks."
 
-#: src/WatchdogUI.cpp:533
+#: src/BurtonUI.cpp:533
 msgid "GPS course crosses boundary in <"
 msgstr "GPS-kurss lõikub piiriga <"
 
-#: src/WatchdogUI.cpp:565
+#: src/BurtonUI.cpp:565
 msgid "nm from boundary\n"
 "(any direction)"
 msgstr "nm piirist\n"
 "(iga suund)"
 
-#: src/WatchdogUI.cpp:577
+#: src/BurtonUI.cpp:577
 msgid "AIS Guard Zone"
 msgstr "AIS valvetsoon"
 
-#: src/WatchdogUI.cpp:621
+#: src/BurtonUI.cpp:621
 msgid "Get Boundary GUID"
 msgstr "Saa piir GUID"
 
-#: src/WatchdogUI.cpp:632 src/WatchdogUI.cpp:638
+#: src/BurtonUI.cpp:632 src/BurtonUI.cpp:638
 msgid "Any"
 msgstr "Iga"
 
-#: src/WatchdogUI.cpp:632
+#: src/BurtonUI.cpp:632
 msgid "Exclusion"
 msgstr "Väljajätt"
 
-#: src/WatchdogUI.cpp:632
+#: src/BurtonUI.cpp:632
 msgid "Inclusion"
 msgstr "Kaasamine"
 
-#: src/WatchdogUI.cpp:632
+#: src/BurtonUI.cpp:632
 msgid "Neither"
 msgstr "Mitte kumbki"
 
-#: src/WatchdogUI.cpp:634
+#: src/BurtonUI.cpp:634
 msgid "Boundary Type"
 msgstr "Piiri laad"
 
-#: src/WatchdogUI.cpp:638
+#: src/BurtonUI.cpp:638
 msgid "Active"
 msgstr "Aktiivne"
 
-#: src/WatchdogUI.cpp:638
+#: src/BurtonUI.cpp:638
 msgid "Inactive"
 msgstr "Passivne"
 
-#: src/WatchdogUI.cpp:640
+#: src/BurtonUI.cpp:640
 msgid "Boundary State"
 msgstr "Piiri olukord"
 
-#: src/WatchdogUI.cpp:653
+#: src/BurtonUI.cpp:653
 msgid "Check Frequency  (Secs)\n"
 "(Note: not Guard Zone)"
 msgstr "Kontrolli sagedust (sek)\n"
 "(Märkus: mitte valvetsoon)"
 
-#: src/WatchdogUI.cpp:663
+#: src/BurtonUI.cpp:663
 msgid "Graphical overlay for GPS fix displays line from boat to location of the point in the found boundary"
 msgstr "GPS'i graafiline ülekate näitab joont paadist leitud piiril punkti asukohta"
 
-#: src/WatchdogUI.cpp:706
+#: src/BurtonUI.cpp:706
 msgid "Require following NMEA sentences:"
 msgstr "Vajalik on järgmine NMEA pakkumine:"
 
-#: src/WatchdogUI.cpp:710
+#: src/BurtonUI.cpp:710
 msgid "$GPGGA"
 msgstr "$GPGGA"
 
-#: src/WatchdogUI.cpp:726
+#: src/BurtonUI.cpp:726
 msgid "at least every"
 msgstr "vähemalt iga"
 
-#: src/WatchdogUI.cpp:733
+#: src/BurtonUI.cpp:733
 msgid "seconds"
 msgstr "sekundit"
 
-#: src/WatchdogUI.cpp:762
+#: src/BurtonUI.cpp:762
 msgid "No User Activity for"
 msgstr "Kasutaja tegevus puudub"
 
-#: src/WatchdogUI.cpp:769
+#: src/BurtonUI.cpp:769
 msgid "minute(s)"
 msgstr "minuti(te) jooksul"
 
-#: src/WatchdogUI.cpp:798
+#: src/BurtonUI.cpp:798
 msgid "Latitude"
 msgstr "Laius"
 
-#: src/WatchdogUI.cpp:816
+#: src/BurtonUI.cpp:816
 msgid "Longitude"
 msgstr "Pikkus"
 
-#: src/WatchdogUI.cpp:831
+#: src/BurtonUI.cpp:831
 msgid "Sync to Boat"
 msgstr "Aluse asukoht"
 
-#: src/WatchdogUI.cpp:834
+#: src/BurtonUI.cpp:834
 msgid "Radius"
 msgstr "raadius"
 
-#: src/WatchdogUI.cpp:848
+#: src/BurtonUI.cpp:848
 msgid "Automatically syncronize to the boat whenever enabled"
 msgstr "Automaatselt sünkroniseeri alusega iga kord kui lubatud"
 
-#: src/WatchdogUI.cpp:851
+#: src/BurtonUI.cpp:851
 msgid "Graphical overlay displays bounding anchor area"
 msgstr "Graafiline ülekate kuvab ankruala piiri"
 
-#: src/WatchdogUI.cpp:887
+#: src/BurtonUI.cpp:887
 msgid "Port or Starboard"
 msgstr "Pak- või tüürpoord"
 
-#: src/WatchdogUI.cpp:896
+#: src/BurtonUI.cpp:896
 msgid "Off Course By >"
 msgstr "Kursi kõrvalekalle >"
 
-#: src/WatchdogUI.cpp:903
+#: src/BurtonUI.cpp:903
 msgid "Degrees"
 msgstr "kraadi"
 
-#: src/WatchdogUI.cpp:907
+#: src/BurtonUI.cpp:907
 msgid "With Course Of"
 msgstr "Aluseks kurss"
 
-#: src/WatchdogUI.cpp:914
+#: src/BurtonUI.cpp:914
 msgid "Current Course"
 msgstr "Praegune kurss"
 
-#: src/WatchdogUI.cpp:920
+#: src/BurtonUI.cpp:920
 msgid "Graphical overlay displays lines bounding valid courses"
 msgstr "Graafiline ülekate kuvab jooni, mis piiravad korrektseid kursse"
 
-#: src/WatchdogUI.cpp:943
+#: src/BurtonUI.cpp:943
 msgid "Speed Alarm"
 msgstr "Kiiruse häire"
 
-#: src/WatchdogUI.cpp:954
+#: src/BurtonUI.cpp:954
 msgid "Under Speed"
 msgstr "Alakiirus"
 
-#: src/WatchdogUI.cpp:954
+#: src/BurtonUI.cpp:954
 msgid "Over Speed"
 msgstr "Ülekiirus"
 
-#: src/WatchdogUI.cpp:963
+#: src/BurtonUI.cpp:963
 msgid "Speed over ground"
 msgstr "Kiirus põhja suhtes"
 
-#: src/WatchdogUI.cpp:967
+#: src/BurtonUI.cpp:967
 msgid "1"
 msgstr "1"
 
-#: src/WatchdogUI.cpp:978
+#: src/BurtonUI.cpp:978
 msgid "knots"
 msgstr "sõlme"
 
-#: src/WatchdogUI.cpp:991
+#: src/BurtonUI.cpp:991
 msgid "Seconds to Average\n"
 "SOG over"
 msgstr "Sekundit keskmine\n"
 "SOG on möödas"
 
-#: src/WatchdogUI.cpp:1001
+#: src/BurtonUI.cpp:1001
 msgid "Graphical overlay displays circle with radius of this speed"
 msgstr "Graafiline ülekate kuvab ringi, mille raadiuseks on valitud kiirus"
 
-#: src/WatchdogUI.h:68
+#: src/BurtonUI.h:68
 msgid "WatchDog"
-msgstr "Watchdog"
+msgstr "Burton"
 
-#: src/WatchdogUI.h:103
-msgid "About Watchdog Properties"
-msgstr "Watchdog atribuutide kohta"
+#: src/BurtonUI.h:103
+msgid "About Burton Properties"
+msgstr "Burton atribuutide kohta"
 
-#: src/WatchdogUI.h:142
-msgid "Watchdog Configuration"
-msgstr "Watchdog seadistamine"
+#: src/BurtonUI.h:142
+msgid "Burton Configuration"
+msgstr "Burton seadistamine"
 
-#: src/WatchdogUI.h:166
+#: src/BurtonUI.h:166
 msgid "New Alarm"
 msgstr "Uus häire"
 
-#: src/WatchdogUI.h:202
+#: src/BurtonUI.h:202
 msgid "Edit Alarm"
 msgstr "Muuda häiret"
 
-#: src/watchdog_pi.cpp:237
-msgid "Watchdog PlugIn for OpenCPN"
-msgstr "Watchdog'i plugin OpenCPN'i jaoks"
+#: src/burton_pi.cpp:237
+msgid "Burton PlugIn for OpenCPN"
+msgstr "Burton'i plugin OpenCPN'i jaoks"
 
-#: src/watchdog_pi.cpp:242
-msgid "Watchdog PlugIn for OpenCPN\n"
+#: src/burton_pi.cpp:242
+msgid "Burton PlugIn for OpenCPN\n"
 "Alarm user of changing conditions."
-msgstr "Watchdog'i plugin OpenCPN'i jaoks\n"
+msgstr "Burton'i plugin OpenCPN'i jaoks\n"
 "Hoiatab kasutajat muutuvatest tingimustest."
 

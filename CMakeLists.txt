@@ -47,12 +47,12 @@ if(COMMAND cmake_policy)
 endif(COMMAND cmake_policy)
 
 # define plugin name, owner and versions
-SET(VERBOSE_NAME "Watchdog")
-set(COMMON_NAME "Watchdog")  # Search "getcommonname"in watchdog_pi.cpp
-set(TITLE_NAME "Watchdog")
+SET(VERBOSE_NAME "Burton")
+set(COMMON_NAME "Burton")  # Search "getcommonname"in burton_pi.cpp
+set(TITLE_NAME "Burton")
 set(PACKAGE_CONTACT "Sean d'Epagnier")
-set(PACKAGE "watchdog_pi")
-set(SHORT_DESCRIPTION "Implement watchdog ability for opencpn")
+set(PACKAGE "burton_pi")
+set(SHORT_DESCRIPTION "Implement burton ability for opencpn")
 set(LONG_DESCRIPTION "Multiple Configurable alarms for  changing conditions for boundaries, cog, landfall, ais, wind, nmea, weather, pypilot, wind, deadman, etc.")
 
 set(VERSION_MAJOR "2")
@@ -74,7 +74,7 @@ set(PARENT "opencpn")
 
 #No longer needed, queried.
 #set(GIT_USER "rgleason")
-#set(GIT_REPOSITORY_NAME "watchdog_pi")
+#set(GIT_REPOSITORY_NAME "burton_pi")
 
 # Specifies Cloudsmith upload repository suffix for each catalog
 set(PROD "prod")   #Standard Repos
@@ -87,9 +87,9 @@ set(CLOUDSMITH_USER "opencpn")
 
 # Set if  Cloudsmith Base Repository name does not match your Git Repository name.
 #set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins") #Rick's customization
-set(CLOUDSMITH_BASE_REPOSITORY "watchdog")  #without the pi
+set(CLOUDSMITH_BASE_REPOSITORY "burton")  #without the pi
 
-set(XML_INFO_URL "https://opencpn.org/OpenCPN/plugins/watchdog.html")
+set(XML_INFO_URL "https://opencpn.org/OpenCPN/plugins/burton.html")
 set(XML_SUMMARY ${SHORT_DESCRIPTION})
 set(XML_DESCRIPTION ${LONG_DESCRIPTION})
 
@@ -158,7 +158,7 @@ include("PluginConfigure")
 add_definitions(-DUSE_S57)
 
 # ----Remember to Add your project Set(SRCS and set(HDRS  etc..	
-# ++++++++++++++Section below is direct from Watchdog +++++++++##
+# ++++++++++++++Section below is direct from Burton +++++++++##
 
 # see above option (PLUGIN_USE_SVG "Use SVG graphics" ON)  
 IF(WATCHDOG_USE_SVG)
@@ -166,15 +166,15 @@ IF(WATCHDOG_USE_SVG)
 ENDIF(WATCHDOG_USE_SVG)
 
 SET(SRCS
-            src/watchdog_pi.cpp
-            src/WatchdogDialog.cpp
-            src/WatchdogPropertiesDialog.cpp
+            src/burton_pi.cpp
+            src/BurtonDialog.cpp
+            src/BurtonPropertiesDialog.cpp
             src/ConfigurationDialog.cpp
             src/NewAlarmDialog.cpp
             src/EditAlarmDialog.cpp
             src/Alarm.cpp
             src/signalk_client.cpp
-            src/WatchdogUI.cpp
+            src/BurtonUI.cpp
             src/icons.cpp
             src/ODAPI.h
             src/wddc.cpp
@@ -192,10 +192,10 @@ SET(HDRS
 			src/ODAPI.h
 			src/signalk_client.h
 			src/TexFont.h
-			src/watchdog_pi.h
-			src/WatchdogDialog.h
-			src/WatchdogPropertiesDialog.h
-			src/WatchdogUI.h
+			src/burton_pi.h
+			src/BurtonDialog.h
+			src/BurtonPropertiesDialog.h
+			src/BurtonUI.h
 			src/wddc.h
 			src/WeatherPanel.h
 			src/WindPanel.h
@@ -299,7 +299,7 @@ endif(QT_ANDROID)
 #target_link_libraries(${PACKAGE_NAME} ocpn::nmea0183)
 #had errors,  trying PluginNmeaCmake
 
-# +++++Section above is direct from Watchdog +++++++++++++##
+# +++++Section above is direct from Burton +++++++++++++##
 
 #JSON Validator: Every plugin that uses JSON for passing messages should use a validator.  A JSON validator is much like an XML validator, the validator allows the system to ignore non-conformant messages.  The JSON validator changes the OSABI flavor of the Linux executable so there is code to change it back.
 

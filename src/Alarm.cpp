@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Project:  OpenCPN
- * Purpose:  watchdog Plugin
+ * Purpose:  burton Plugin
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
@@ -35,8 +35,8 @@
 #include "tinyxml.h"
 #include "signalk_client.h"
 
-#include "watchdog_pi.h"
-#include "WatchdogDialog.h"
+#include "burton_pi.h"
+#include "BurtonDialog.h"
 #include "WindPanel.h"
 #include "WeatherPanel.h"
 
@@ -62,22 +62,22 @@ public:
                     m_Radius(50)
         {
             minoldfix.FixTime = 0;
-            m_Latitude = g_watchdog_pi->LastFix().Lat;
-            m_Longitude = g_watchdog_pi->LastFix().Lon;
+            m_Latitude = g_burton_pi->LastFix().Lat;
+            m_Longitude = g_burton_pi->LastFix().Lon;
             m_bWasEnabled = false;
         }
 
     wxString Type() { return _("Anchor"); }
 
     bool Test() {
-        if(wxIsNaN(g_watchdog_pi->m_sog))
+        if(wxIsNaN(g_burton_pi->m_sog))
             return m_bNoData;
         return Distance() > m_Radius;
     }
 
     wxString GetStatus() {
         if(!m_bWasEnabled && m_bEnabled && m_bAutoSync) {
-            PlugIn_Position_Fix_Ex lastfix = g_watchdog_pi->LastFix();
+            PlugIn_Position_Fix_Ex lastfix = g_burton_pi->LastFix();
             m_Latitude = lastfix.Lat;
             m_Longitude = lastfix.Lon;
             RequestRefresh(GetOCPNCanvasWindow());
@@ -152,9 +152,9 @@ public:
 
 private:
     double Distance() {
-        if(wxIsNaN(g_watchdog_pi->m_cog))
+        if(wxIsNaN(g_burton_pi->m_cog))
             return NAN;
-        PlugIn_Position_Fix_Ex lastfix = g_watchdog_pi->LastFix();
+        PlugIn_Position_Fix_Ex lastfix = g_burton_pi->LastFix();
 
         double anchordist;
         DistanceBearingMercator_Plugin(lastfix.Lat, lastfix.Lon,
@@ -174,7 +174,7 @@ class CourseAlarm : public Alarm
 {
 public:
     CourseAlarm() : Alarm(true), m_Mode(BOTH), m_Tolerance(20), m_bGPSCourse(true) {
-        m_Course = g_watchdog_pi->m_cog;
+        m_Course = g_burton_pi->m_cog;
     }
 
     wxString Type() { return _("Course"); }
@@ -206,7 +206,7 @@ public:
     }
 
     void Render(wdDC &dc, PlugIn_ViewPort &vp) {
-        PlugIn_Position_Fix_Ex lastfix = g_watchdog_pi->LastFix();
+        PlugIn_Position_Fix_Ex lastfix = g_burton_pi->LastFix();
 
         double lat1 = lastfix.Lat, lon1 = lastfix.Lon, lat2, lon2, lat3, lon3;
         double dist = lastfix.Sog;
@@ -255,7 +255,7 @@ public:
         if(!strcasecmp(mode, "Port")) m_Mode = PORT;
         else if(!strcasecmp(mode, "Starboard")) m_Mode = STARBOARD;
         else if(!strcasecmp(mode, "Starboard")) m_Mode = BOTH;
-        else wxLogMessage("Watchdog: " + wxString(_("invalid Course mode")) + ": "
+        else wxLogMessage("Burton: " + wxString(_("invalid Course mode")) + ": "
                          + wxString::FromUTF8(mode));
 
         e->Attribute("Tolerance", &m_Tolerance);
@@ -279,8 +279,8 @@ public:
 private:
     double CourseError() {
         double error = heading_resolve((m_bGPSCourse ?
-                                        g_watchdog_pi->m_cog :
-                                        g_watchdog_pi->m_hdm) - m_Course);
+                                        g_burton_pi->m_cog :
+                                        g_burton_pi->m_hdm) - m_Course);
         switch(m_Mode) {
         case PORT:      return -error;
         case STARBOARD: return  error;
@@ -302,7 +302,7 @@ public:
 
     wxString GetStatus() {
         wxString s;
-        if(wxIsNaN(g_watchdog_pi->m_sog))
+        if(wxIsNaN(g_burton_pi->m_sog))
             s = "N/A";
         else {
             wxString fmt("%.1f");
@@ -315,7 +315,7 @@ public:
     }
 
     void Render(wdDC &dc, PlugIn_ViewPort &vp) {
-        PlugIn_Position_Fix_Ex lastfix = g_watchdog_pi->LastFix();
+        PlugIn_Position_Fix_Ex lastfix = g_burton_pi->LastFix();
 
         double knots = Knots();
 
@@ -364,7 +364,7 @@ public:
         const char *mode = e->Attribute("Mode");
         if(!strcasecmp(mode, "Underspeed")) m_Mode = UNDERSPEED;
         else if(!strcasecmp(mode, "Overspeed")) m_Mode = OVERSPEED;
-        else wxLogMessage("Watchdog: " + wxString(_("invalid Speed mode")) + ": "
+        else wxLogMessage("Burton: " + wxString(_("invalid Speed mode")) + ": "
                          + wxString::FromUTF8(mode));
 
         e->Attribute("Speed", &m_dSpeed);
@@ -390,7 +390,7 @@ public:
     void OnTimer( wxTimerEvent &tEvent )
     {
         Alarm::OnTimer( tEvent );
-        double sog = g_watchdog_pi->LastFix().Sog;
+        double sog = g_burton_pi->LastFix().Sog;
         if(!wxIsNaN(sog))
             m_SOGqueue.push_front(sog);
         while((int)m_SOGqueue.size() > m_iAverageTime)
@@ -400,7 +400,7 @@ public:
 private:
     double Knots() {
         if(m_SOGqueue.size() == 0)
-            return g_watchdog_pi->LastFix().Sog;
+            return g_burton_pi->LastFix().Sog;
         // average speed in list
         double l_avSpeed = 0.0;
         for(std::list<double>::iterator it = m_SOGqueue.begin(); it != m_SOGqueue.end(); it++)
@@ -473,7 +473,7 @@ public:
             return;
         if(wxIsNaN(m_direction))
             return;
-        PlugIn_Position_Fix_Ex lastfix = g_watchdog_pi->LastFix();
+        PlugIn_Position_Fix_Ex lastfix = g_burton_pi->LastFix();
 
         double lat[4] = {lastfix.Lat}, lon[4] = {lastfix.Lon};
         double dist = lastfix.Sog;
@@ -525,7 +525,7 @@ public:
         default: break;
         }
 
-        m_gps_speed = g_watchdog_pi->LastFix().Sog * .1 + m_gps_speed * .9;
+        m_gps_speed = g_burton_pi->LastFix().Sog * .1 + m_gps_speed * .9;
         return 0;
     }
 
@@ -554,14 +554,14 @@ public:
         else if(!strcasecmp(mode, "Direction")) {
             m_Mode = DIRECTION;
             e->Attribute("Range", &m_dRange);
-        } else wxLogMessage("Watchdog: " + wxString(_("invalid Wind mode")) + ": "
+        } else wxLogMessage("Burton: " + wxString(_("invalid Wind mode")) + ": "
                          + wxString::FromUTF8(mode));
 
         const char *type = e->Attribute("Type");
         if(!strcasecmp(mode, "Apparent")) m_Type = APPARENT;
         else if(!strcasecmp(mode, "True Relative")) m_Type = TRUE_RELATIVE;
         else if(!strcasecmp(mode, "True Absolute")) m_Type = TRUE_ABSOLUTE;
-        else wxLogMessage("Watchdog: " + wxString(_("invalid Wind type")) + ": "
+        else wxLogMessage("Burton: " + wxString(_("invalid Wind type")) + ": "
                          + wxString::FromUTF8(type));
 
         e->Attribute("Value", &m_dVal);
@@ -590,7 +590,7 @@ private:
         if(!nmea.PreParse())
             return;
         if(nmea.LastSentenceIDReceived == "HDM" && nmea.Parse()) {
-            m_bearing = nmea.Hdm.DegreesMagnetic + g_watchdog_pi->Declination();
+            m_bearing = nmea.Hdm.DegreesMagnetic + g_burton_pi->Declination();
         } else
         if(nmea.LastSentenceIDReceived == "MWV" &&
            nmea.Parse() && nmea.Mwv.IsDataValid == NTrue ) {
@@ -699,7 +699,7 @@ public:
         else if(!strcasecmp(variable, "SeaTemperature")) m_Variable = SEA_TEMPERATURE;
         else if(!strcasecmp(variable, "RelativeHumidity")) m_Variable = RELATIVE_HUMIDITY;
         else {
-            wxLogMessage("Watchdog: " + wxString(_("invalid Weather variable")) +
+            wxLogMessage("Burton: " + wxString(_("invalid Weather variable")) +
                          ": " + wxString::FromUTF8(variable));
             m_Variable = BAROMETER;
         }
@@ -710,7 +710,7 @@ public:
         else if(!strcasecmp(mode, "Increasing")) m_Mode = INCREASING;
         else if(!strcasecmp(mode, "Decreasing")) m_Mode = DECREASING;
         else {
-            wxLogMessage("Watchdog: " + wxString(_("invalid Weather mode")) +
+            wxLogMessage("Burton: " + wxString(_("invalid Weather mode")) +
                          ": " + wxString::FromUTF8(mode));
             m_Mode = ABOVE;
         }
@@ -821,11 +821,11 @@ public:
 
     bool Test() {
         wxTimeSpan DeadmanSpan = wxTimeSpan::Minutes(m_Minutes);
-        return wxDateTime::Now() - g_watchdog_pi->m_cursor_time > DeadmanSpan;
+        return wxDateTime::Now() - g_burton_pi->m_cursor_time > DeadmanSpan;
     }
 
     wxString GetStatus() {
-        wxTimeSpan span = wxDateTime::Now() - g_watchdog_pi->m_cursor_time;
+        wxTimeSpan span = wxDateTime::Now() - g_burton_pi->m_cursor_time;
         int days = span.GetDays();
         span -= wxTimeSpan::Days(days);
         int hours = span.GetHours();
@@ -955,7 +955,7 @@ public:
                       m_Distance(3)
         {
             if(!PlugIn_GSHHS_CrossesLand(0, 0, 60, 60)) {
-                wxLogMessage("Watchdog: " + wxString(_("landfall alarm without gshhs data")));
+                wxLogMessage("Burton: " + wxString(_("landfall alarm without gshhs data")));
                 m_bData = false;
             } else
                 m_bData = true;
@@ -964,7 +964,7 @@ public:
     wxString Type() { return _("LandFall"); }
 
     bool Test() {
-        PlugIn_Position_Fix_Ex lastfix = g_watchdog_pi->LastFix();
+        PlugIn_Position_Fix_Ex lastfix = g_burton_pi->LastFix();
 
         if(wxIsNaN(lastfix.Lat))
             return m_bNoData;
@@ -1072,7 +1072,7 @@ public:
     }
 
     void Render(wdDC &dc, PlugIn_ViewPort &vp) {
-        PlugIn_Position_Fix_Ex lastfix = g_watchdog_pi->LastFix();
+        PlugIn_Position_Fix_Ex lastfix = g_burton_pi->LastFix();
         if(wxIsNaN(m_crossinglat1))
             return;
 
@@ -1113,7 +1113,7 @@ public:
         const char *mode = e->Attribute("Mode");
         if(!strcasecmp(mode, "Time")) m_Mode = TIME;
         else if(!strcasecmp(mode, "Distance")) m_Mode = DISTANCE;
-        else wxLogMessage("Watchdog: " + wxString(_("invalid LandFall mode")) + ": "
+        else wxLogMessage("Burton: " + wxString(_("invalid LandFall mode")) + ": "
                          + wxString::FromUTF8(mode));
 
         e->Attribute("TimeMinutes", &m_TimeMinutes);
@@ -1233,7 +1233,7 @@ public:
     }
 
     bool Test() {
-        PlugIn_Position_Fix_Ex lastfix = g_watchdog_pi->LastFix();
+        PlugIn_Position_Fix_Ex lastfix = g_burton_pi->LastFix();
 
         if(wxIsNaN(lastfix.Lat))
             return m_bNoData;
@@ -1928,7 +1928,7 @@ public:
 
     void Render(wdDC &dc, PlugIn_ViewPort &vp) {
         if(m_bFired) {
-            PlugIn_Position_Fix_Ex lastfix = g_watchdog_pi->LastFix();
+            PlugIn_Position_Fix_Ex lastfix = g_burton_pi->LastFix();
             wxPoint r1, r2;
 
             GetCanvasPixLL(&vp, &r1, lastfix.Lat, lastfix.Lon);
@@ -2056,7 +2056,7 @@ public:
         else if(!strcasecmp(mode, "Distance")) m_Mode = DISTANCE;
         else if(!strcasecmp(mode, "Anchor")) m_Mode = ANCHOR;
         else if(!strcasecmp(mode, "Guard")) m_Mode = GUARD;
-        else wxLogMessage("Watchdog: " + wxString(_("invalid Boundary mode")) + ": "
+        else wxLogMessage("Burton: " + wxString(_("invalid Boundary mode")) + ": "
                          + wxString::FromUTF8(mode));
 
         e->Attribute("TimeMinutes", &m_TimeMinutes);
@@ -2136,7 +2136,7 @@ public:
                     + _("Name") + ": " + m_BoundaryName + "\n"
                     + _("Description") + ": " + m_BoundaryDescription + "\n"
                     + _("GUID") + ": " + m_BoundaryGUID;
-                wxMessageDialog mdlg(GetOCPNCanvasWindow(), l_s, _("Watchdog"), wxOK | wxICON_WARNING);
+                wxMessageDialog mdlg(GetOCPNCanvasWindow(), l_s, _("Burton"), wxOK | wxICON_WARNING);
                 return l_s;
             }
             case GUARD: {
@@ -2162,7 +2162,7 @@ public:
                     + _("Guard Zone Name") + ": " + m_GuardZoneName + "\n"
                     + _("Description") + ": " + m_GuardZoneDescription + "\n"
                     + _("GUID") + ": " + m_GuardZoneGUID + "\n" + _("Guard Zone not Found");
-                wxMessageDialog mdlg(GetOCPNCanvasWindow(), l_s, _("Watchdog"), wxOK | wxICON_WARNING);
+                wxMessageDialog mdlg(GetOCPNCanvasWindow(), l_s, _("Burton"), wxOK | wxICON_WARNING);
                 mdlg.ShowModal();
                 m_bFired = false;
                 m_bEnabled = false;
@@ -2225,8 +2225,8 @@ public:
                 m_bGuardZoneFired = true;
                 m_bFired = true;
             }
-            if(g_watchdog_pi->m_WatchdogDialog && g_watchdog_pi->m_WatchdogDialog->IsShown())
-                g_watchdog_pi->m_WatchdogDialog->UpdateStatus(iAlarmIndex);
+            if(g_burton_pi->m_BurtonDialog && g_burton_pi->m_BurtonDialog->IsShown())
+                g_burton_pi->m_BurtonDialog->UpdateStatus(iAlarmIndex);
             
         }
     }
@@ -2241,10 +2241,10 @@ public:
                 break;
             case GUARD:
 //                Alarm::OnTimer( tEvent );
-                if(g_watchdog_pi->m_WatchdogDialog && g_watchdog_pi->m_WatchdogDialog->IsShown())
+                if(g_burton_pi->m_BurtonDialog && g_burton_pi->m_BurtonDialog->IsShown())
                     for(unsigned int i=0; i<Alarm::s_Alarms.size(); i++)
                         if(Alarm::s_Alarms[i] == this)
-                            g_watchdog_pi->m_WatchdogDialog->UpdateStatus(i);
+                            g_burton_pi->m_BurtonDialog->UpdateStatus(i);
                 break;
         }
         return;
@@ -2634,11 +2634,11 @@ void Alarm::RenderAll(wdDC &dc, PlugIn_ViewPort &vp)
 
 void Alarm::LoadConfigAll()
 {
-    wxString configuration = watchdog_pi::StandardPath() + "WatchdogConfiguration.xml";
+    wxString configuration = burton_pi::StandardPath() + "BurtonConfiguration.xml";
     TiXmlDocument doc;
 
     if(!doc.LoadFile(configuration.mb_str())) {
-        wxLogMessage("Watchdog: " + wxString(_("Failed to read")) + ": " + configuration);
+        wxLogMessage("Burton: " + wxString(_("Failed to read")) + ": " + configuration);
         return;
     }
 
@@ -2660,7 +2660,7 @@ void Alarm::LoadConfigAll()
             else if(!strcasecmp(type, "Boundary")) alarm = Alarm::NewAlarm(BOUNDARY);
             else if(!strcasecmp(type, "pypilot")) alarm = Alarm::NewAlarm(PYPILOT);
             else {
-                wxLogMessage("Watchdog: " + wxString(_("invalid alarm type")) + ": " + wxString::FromUTF8(type));
+                wxLogMessage("Burton: " + wxString(_("invalid alarm type")) + ": " + wxString::FromUTF8(type));
                 continue;
             }
 
@@ -2678,13 +2678,13 @@ void Alarm::SaveConfigAll()
     TiXmlDeclaration* decl = new TiXmlDeclaration( "1.0", "utf-8", "" );
     doc.LinkEndChild( decl );
 
-    TiXmlElement * root = new TiXmlElement( "OpenCPNWatchdogConfiguration" );
+    TiXmlElement * root = new TiXmlElement( "OpenCPNBurtonConfiguration" );
     doc.LinkEndChild( root );
 
     char version[24];
     sprintf(version, "%d.%d", PLUGIN_VERSION_MAJOR, PLUGIN_VERSION_MINOR);
     root->SetAttribute("version", version);
-    root->SetAttribute("creator", "Opencpn Watchdog plugin");
+    root->SetAttribute("creator", "Opencpn Burton plugin");
     root->SetAttribute("author", "Sean D'Epagnier");
 
     for(unsigned int i=0; i<s_Alarms.size(); i++) {
@@ -2695,9 +2695,9 @@ void Alarm::SaveConfigAll()
         root->LinkEndChild(c);
     }
 
-    wxString configuration = watchdog_pi::StandardPath() + "WatchdogConfiguration.xml";
+    wxString configuration = burton_pi::StandardPath() + "BurtonConfiguration.xml";
     if(!doc.SaveFile(configuration.mb_str()))
-        wxLogMessage("Watchdog: " + wxString(_("failed to save")) + ": " + configuration);
+        wxLogMessage("Burton: " + wxString(_("failed to save")) + ": " + configuration);
 }
 
 void Alarm::DeleteAll()
@@ -2772,7 +2772,7 @@ void Alarm::Run()
             wxMessageDialog mdlg(GetOCPNCanvasWindow(),
                                  Type() + " " +
                                  _("Failed to execute command: ") + m_sCommand,
-                                 _("Watchdog"), wxOK | wxICON_ERROR);
+                                 _("Burton"), wxOK | wxICON_ERROR);
             mdlg.ShowModal();
             m_bCommand = false;
         }
@@ -2780,7 +2780,7 @@ void Alarm::Run()
     if(m_bMessageBox) {
         wxMessageDialog mdlg(GetOCPNCanvasWindow(), Type() + " " + _("ALARM!")
                              + MessageBoxText(),
-                             _("Watchdog"), wxOK | wxICON_WARNING);
+                             _("Burton"), wxOK | wxICON_WARNING);
         mdlg.ShowModal();
     }
 }
@@ -2820,14 +2820,14 @@ void Alarm::SaveConfigBase(TiXmlElement *c)
 void Alarm::OnTimer( wxTimerEvent & )
 {
     wxFileConfig *pConf = GetOCPNConfigObject();
-    pConf->SetPath (  "/Settings/Watchdog"  );
+    pConf->SetPath (  "/Settings/Burton"  );
 
     int enabled = pConf->Read ( "Enabled", 1L );
 
-    if(enabled == 2 && !g_watchdog_pi->m_bWatchdogDialogShown)
+    if(enabled == 2 && !g_burton_pi->m_bBurtonDialogShown)
         enabled = 0;
 
-    if(enabled == 3 && (!g_watchdog_pi->m_WatchdogDialog || !g_watchdog_pi->m_WatchdogDialog->IsShown()))
+    if(enabled == 3 && (!g_burton_pi->m_BurtonDialog || !g_burton_pi->m_BurtonDialog->IsShown()))
        enabled = 0;
 
     if(enabled && m_bEnabled) {
@@ -2857,8 +2857,8 @@ void Alarm::OnTimer( wxTimerEvent & )
         }
     }
 
-    if(g_watchdog_pi->m_WatchdogDialog && g_watchdog_pi->m_WatchdogDialog->IsShown())
+    if(g_burton_pi->m_BurtonDialog && g_burton_pi->m_BurtonDialog->IsShown())
         for(unsigned int i=0; i<Alarm::s_Alarms.size(); i++)
             if(Alarm::s_Alarms[i] == this)
-                g_watchdog_pi->m_WatchdogDialog->UpdateStatus(i);
+                g_burton_pi->m_BurtonDialog->UpdateStatus(i);
 }

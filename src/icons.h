@@ -9,10 +9,10 @@
 
 extern void initialize_images(void);
 
-extern wxBitmap *_img_watchdog;
+extern wxBitmap *_img_burton;
 
 #ifdef WATCHDOG_USE_SVG
-extern wxString _svg_watchdog;
+extern wxString _svg_burton;
 #endif
 
 #endif /* ICONS_H */

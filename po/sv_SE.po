@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: crowdin.com\n"
 "X-Crowdin-Project: opencpn\n"
 "X-Crowdin-Language: sv-SE\n"
-"X-Crowdin-File: /plugins/watchdog_pi/po/watchdog_pi.pot\n"
+"X-Crowdin-File: /plugins/burton_pi/po/burton_pi.pot\n"
 
 #: src/Alarm.cpp:54
 msgid "landfall alarm without gshhs data"
@@ -84,16 +84,16 @@ msgstr "Tid till Gränslinje"
 msgid "Boundary Distance"
 msgstr "Avstånd till Gränslinje"
 
-#: src/Alarm.cpp:312 src/WatchdogUI.cpp:603
+#: src/Alarm.cpp:312 src/BurtonUI.cpp:603
 msgid "Inclusion Alarm"
 msgstr "Inre bevakning"
 
 #: src/Alarm.cpp:313 src/Alarm.cpp:1028 src/Alarm.cpp:1030
-#: src/watchdog_pi.cpp:582
+#: src/burton_pi.cpp:582
 msgid "Guard Zone"
 msgstr "AIS i bevakningszon"
 
-#: src/Alarm.cpp:324 src/Alarm.cpp:916 src/Alarm.cpp:956 src/WatchdogUI.cpp:606
+#: src/Alarm.cpp:324 src/Alarm.cpp:916 src/Alarm.cpp:956 src/BurtonUI.cpp:606
 msgid "Boundary GUID"
 msgstr "Gränslinjens GUID (Id)"
 
@@ -101,7 +101,7 @@ msgstr "Gränslinjens GUID (Id)"
 msgid "Boundary Name"
 msgstr "Gränsen"
 
-#: src/Alarm.cpp:330 src/WatchdogUI.cpp:580
+#: src/Alarm.cpp:330 src/BurtonUI.cpp:580
 msgid "Guard Zone GUID"
 msgstr "Larmzonens GUID"
 
@@ -181,9 +181,9 @@ msgstr "ogiltigt val av gränsövervakning"
 msgid "Failed to execute command: "
 msgstr "Det gick inte att utföra kommandot: "
 
-#: src/Alarm.cpp:1223 src/Alarm.cpp:2175 src/watchdog_pi.cpp:146
-#: src/watchdog_pi.cpp:232
-msgid "Watchdog"
+#: src/Alarm.cpp:1223 src/Alarm.cpp:2175 src/burton_pi.cpp:146
+#: src/burton_pi.cpp:232
+msgid "Burton"
 msgstr "Vakthunden"
 
 #: src/Alarm.cpp:1231 src/Alarm.cpp:1244 src/Alarm.cpp:1260 src/Alarm.cpp:1271
@@ -257,7 +257,7 @@ msgstr "Ankar"
 msgid "radius"
 msgstr "radie"
 
-#: src/Alarm.cpp:1687 src/WatchdogUI.cpp:841
+#: src/Alarm.cpp:1687 src/BurtonUI.cpp:841
 msgid "meters"
 msgstr "meter"
 
@@ -273,11 +273,11 @@ msgstr "meter"
 msgid "Course"
 msgstr "Kurs"
 
-#: src/Alarm.cpp:1798 src/Alarm.cpp:1822 src/WatchdogUI.cpp:887
+#: src/Alarm.cpp:1798 src/Alarm.cpp:1822 src/BurtonUI.cpp:887
 msgid "Port"
 msgstr "Babord"
 
-#: src/Alarm.cpp:1799 src/Alarm.cpp:1820 src/WatchdogUI.cpp:887
+#: src/Alarm.cpp:1799 src/Alarm.cpp:1820 src/BurtonUI.cpp:887
 msgid "Starboard"
 msgstr "Styrbord"
 
@@ -321,11 +321,11 @@ msgstr "ogiltig larmtyp"
 msgid "failed to save"
 msgstr "det gick inte att spara"
 
-#: src/Alarm.cpp:2157 src/WatchdogUI.cpp:364
+#: src/Alarm.cpp:2157 src/BurtonUI.cpp:364
 msgid "Sound"
 msgstr "Ljud"
 
-#: src/Alarm.cpp:2158 src/WatchdogUI.cpp:370
+#: src/Alarm.cpp:2158 src/BurtonUI.cpp:370
 msgid "Command"
 msgstr "Kommando"
 
@@ -341,12 +341,12 @@ msgstr "Upprepa"
 msgid "Auto Reset"
 msgstr "Återställ automatiskt"
 
-#: src/Alarm.h:96 src/WatchdogUI.cpp:402
+#: src/Alarm.h:96 src/BurtonUI.cpp:402
 msgid "Test"
 msgstr "Testa"
 
-#: src/ConfigurationDialog.cpp:48 src/WatchdogDialog.cpp:108
-#: src/WatchdogUI.cpp:883 src/WatchdogUI.cpp:950
+#: src/ConfigurationDialog.cpp:48 src/BurtonDialog.cpp:108
+#: src/BurtonUI.cpp:883 src/BurtonUI.cpp:950
 msgid "Type"
 msgstr "Typ"
 
@@ -369,7 +369,7 @@ msgstr "De flesta larm bör vara självförklarande\n"
 "\"Automatisk återställning\" återställer larmet om larmorsaken försvinner, men det kan utlösas igen senare."
 
 #: src/EditAlarmDialog.cpp:101
-msgid "Watchdog Information"
+msgid "Burton Information"
 msgstr "Information om Vakthunden"
 
 #: src/EditAlarmDialog.cpp:206 src/EditAlarmDialog.cpp:232
@@ -390,51 +390,51 @@ msgstr "Landkänning"
 msgid "Boundary Alarm"
 msgstr "Gränslarm"
 
-#: src/WatchdogDialog.cpp:109
+#: src/BurtonDialog.cpp:109
 msgid "Status"
 msgstr "Status"
 
-#: src/WatchdogUI.cpp:30
+#: src/BurtonUI.cpp:30
 msgid "Configuration"
 msgstr "Inställningar"
 
-#: src/WatchdogUI.cpp:33
+#: src/BurtonUI.cpp:33
 msgid "Reset"
 msgstr "Återställa"
 
-#: src/WatchdogUI.cpp:36
+#: src/BurtonUI.cpp:36
 msgid "Close"
 msgstr "Avsluta"
 
-#: src/WatchdogUI.cpp:76
+#: src/BurtonUI.cpp:76
 msgid "Name:"
 msgstr "Namn:"
 
-#: src/WatchdogUI.cpp:84
+#: src/BurtonUI.cpp:84
 msgid "Version:"
 msgstr "Version:"
 
-#: src/WatchdogUI.cpp:93
+#: src/BurtonUI.cpp:93
 msgid "Major:"
 msgstr "Major:"
 
-#: src/WatchdogUI.cpp:101
+#: src/BurtonUI.cpp:101
 msgid "Minor:"
 msgstr "Minor:"
 
-#: src/WatchdogUI.cpp:109
+#: src/BurtonUI.cpp:109
 msgid "Patch:"
 msgstr "Fix:"
 
-#: src/WatchdogUI.cpp:120
+#: src/BurtonUI.cpp:120
 msgid "Date:"
 msgstr "Datum:"
 
-#: src/WatchdogUI.cpp:128
+#: src/BurtonUI.cpp:128
 msgid "Other:"
 msgstr "Övrigt:"
 
-#: src/WatchdogUI.cpp:132
+#: src/BurtonUI.cpp:132
 msgid "Please report problems using FlySpray at:\n"
 "https://www.opencpn.org/flyspray/index.php?project=34&do=index&switch=1\n\n"
 "or\n\n"
@@ -442,7 +442,7 @@ msgid "Please report problems using FlySpray at:\n"
 "http://www.cruisersforum.com/forums/f134\n\n"
 "or\n\n"
 "Raise an issue in GIT at:\n"
-"https://github.com/seandepagnier/watchdog_pi/issues\n"
+"https://github.com/seandepagnier/burton_pi/issues\n"
 msgstr "Samtliga refererade länkar för att anmäla problem är på Engelska:\n"
 "Please report problems using FlySpray at:\n"
 "https://www.opencpn.org/flyspray/index.php?project=34&do=index&switch=1\n\n"
@@ -451,308 +451,308 @@ msgstr "Samtliga refererade länkar för att anmäla problem är på Engelska:\n
 "http://www.cruisersforum.com/forums/f134\n\n"
 "or\n\n"
 "Raise an issue in GIT at:\n"
-"https://github.com/seandepagnier/watchdog_pi/issues\n"
+"https://github.com/seandepagnier/burton_pi/issues\n"
 
-#: src/WatchdogUI.cpp:139
+#: src/BurtonUI.cpp:139
 msgid "&OK"
 msgstr "&OK"
 
-#: src/WatchdogUI.cpp:173
+#: src/BurtonUI.cpp:173
 msgid "General Setup"
 msgstr "Allmänna inställningar"
 
-#: src/WatchdogUI.cpp:180
+#: src/BurtonUI.cpp:180
 msgid "Enable All Alarms"
 msgstr "Aktivera alla larm"
 
-#: src/WatchdogUI.cpp:183
-msgid "Enabled after first time Watchdog Dialog is visible"
+#: src/BurtonUI.cpp:183
+msgid "Enabled after first time Burton Dialog is visible"
 msgstr "Valda larm är alltid aktiverade efter att Vakthundens dialogruta har öppnats en gång"
 
-#: src/WatchdogUI.cpp:186
-msgid "Enabled only if Watchdog Dialog is visible"
+#: src/BurtonUI.cpp:186
+msgid "Enabled only if Burton Dialog is visible"
 msgstr "Valda larm aktiveras endast när Vakthundens dialogruta är öppen"
 
-#: src/WatchdogUI.cpp:189
+#: src/BurtonUI.cpp:189
 msgid "Disable All Alarms"
 msgstr "Inaktivera alla larm"
 
-#: src/WatchdogUI.cpp:206
+#: src/BurtonUI.cpp:206
 msgid "Alarms"
 msgstr "Larm"
 
-#: src/WatchdogUI.cpp:220
+#: src/BurtonUI.cpp:220
 msgid "New"
 msgstr "Nytt"
 
-#: src/WatchdogUI.cpp:223
+#: src/BurtonUI.cpp:223
 msgid "Edit"
 msgstr "Ändra"
 
-#: src/WatchdogUI.cpp:226
+#: src/BurtonUI.cpp:226
 msgid "Delete"
 msgstr "Ta bort"
 
-#: src/WatchdogUI.cpp:229
+#: src/BurtonUI.cpp:229
 msgid "Delete All"
 msgstr "Ta bort alla"
 
-#: src/WatchdogUI.cpp:253
+#: src/BurtonUI.cpp:253
 msgid "About Author"
 msgstr "Om utgivaren"
 
-#: src/WatchdogUI.cpp:356
+#: src/BurtonUI.cpp:356
 msgid "Alarm Action"
 msgstr "Åtgärd vid larm"
 
-#: src/WatchdogUI.cpp:367
+#: src/BurtonUI.cpp:367
 msgid "Select a file"
 msgstr "Välj en fil"
 
-#: src/WatchdogUI.cpp:384
+#: src/BurtonUI.cpp:384
 msgid "Message Box"
 msgstr "Meddelanderuta"
 
-#: src/WatchdogUI.cpp:390
+#: src/BurtonUI.cpp:390
 msgid "Repeat Alarm after seconds"
 msgstr "Upprepa larmet efter (sek)"
 
-#: src/WatchdogUI.cpp:396
+#: src/BurtonUI.cpp:396
 msgid "Automatically Reset"
 msgstr "Återställ automatiskt"
 
-#: src/WatchdogUI.cpp:399
+#: src/BurtonUI.cpp:399
 msgid "Graphics Enabled"
 msgstr "Aktivera grafisk visning"
 
-#: src/WatchdogUI.cpp:417
+#: src/BurtonUI.cpp:417
 msgid "Information"
 msgstr "Information"
 
-#: src/WatchdogUI.cpp:464
+#: src/BurtonUI.cpp:464
 msgid "GPS course crosses land in <"
 msgstr "GPS-kursen når land om <"
 
-#: src/WatchdogUI.cpp:470 src/WatchdogUI.cpp:539
+#: src/BurtonUI.cpp:470 src/BurtonUI.cpp:539
 msgid "minutes"
 msgstr "minuter"
 
-#: src/WatchdogUI.cpp:482 src/WatchdogUI.cpp:551
+#: src/BurtonUI.cpp:482 src/BurtonUI.cpp:551
 msgid "GPS fix is <"
 msgstr "GPS-position är <"
 
-#: src/WatchdogUI.cpp:485 src/WatchdogUI.cpp:554
+#: src/BurtonUI.cpp:485 src/BurtonUI.cpp:554
 msgid "3"
 msgstr "3"
 
-#: src/WatchdogUI.cpp:496
+#: src/BurtonUI.cpp:496
 msgid "nm from coastline\n"
 "(any direction)"
 msgstr "NM från kustlinje\n"
 "(i någon riktning)"
 
-#: src/WatchdogUI.cpp:503
+#: src/BurtonUI.cpp:503
 msgid "Graphical overlay for time displays line from boat to location of land crossing"
 msgstr "Rita linje som visar avstånd och riktning för landkänning"
 
-#: src/WatchdogUI.cpp:507
+#: src/BurtonUI.cpp:507
 msgid "Landfall detection uses gshhs (global heirarchical high-resolution shoreline data.)\n"
 "Consider installing the highest resolution database for best accuracy."
 msgstr "Närhet till land upptäcks med hjälp gshhs (Databeteckning för högupplöst kustlinje)\n"
 "För bästa tillförlitlighet bör detaljnivån för vektorkorten vara hög."
 
-#: src/WatchdogUI.cpp:533
+#: src/BurtonUI.cpp:533
 msgid "GPS course crosses boundary in <"
 msgstr "GPS-kursen leder till en gränslinje inom"
 
-#: src/WatchdogUI.cpp:565
+#: src/BurtonUI.cpp:565
 msgid "nm from boundary\n"
 "(any direction)"
 msgstr "NM från gränslinje\n"
 "(Oavsett riktning)"
 
-#: src/WatchdogUI.cpp:577
+#: src/BurtonUI.cpp:577
 msgid "AIS Guard Zone"
 msgstr "AIS bevakningszon"
 
-#: src/WatchdogUI.cpp:621
+#: src/BurtonUI.cpp:621
 msgid "Get Boundary GUID"
 msgstr "Läs in aktuell gräns-GUID"
 
-#: src/WatchdogUI.cpp:632 src/WatchdogUI.cpp:638
+#: src/BurtonUI.cpp:632 src/BurtonUI.cpp:638
 msgid "Any"
 msgstr "Alla"
 
-#: src/WatchdogUI.cpp:632
+#: src/BurtonUI.cpp:632
 msgid "Exclusion"
 msgstr "Yttre"
 
-#: src/WatchdogUI.cpp:632
+#: src/BurtonUI.cpp:632
 msgid "Inclusion"
 msgstr "Inre"
 
-#: src/WatchdogUI.cpp:632
+#: src/BurtonUI.cpp:632
 msgid "Neither"
 msgstr "Oberoende"
 
-#: src/WatchdogUI.cpp:634
+#: src/BurtonUI.cpp:634
 msgid "Boundary Type"
 msgstr "Gränstyp"
 
-#: src/WatchdogUI.cpp:638
+#: src/BurtonUI.cpp:638
 msgid "Active"
 msgstr "Aktiv"
 
-#: src/WatchdogUI.cpp:638
+#: src/BurtonUI.cpp:638
 msgid "Inactive"
 msgstr "Inaktiv"
 
-#: src/WatchdogUI.cpp:640
+#: src/BurtonUI.cpp:640
 msgid "Boundary State"
 msgstr "Gränsstatus"
 
-#: src/WatchdogUI.cpp:653
+#: src/BurtonUI.cpp:653
 msgid "Check Frequency  (Secs)\n"
 "(Note: not Guard Zone)"
 msgstr "Uppdateringsfrekvens (Sek)\n"
 "(OBS: Gäller ej \"Larmzon\")"
 
-#: src/WatchdogUI.cpp:663
+#: src/BurtonUI.cpp:663
 msgid "Graphical overlay for GPS fix displays line from boat to location of the point in the found boundary"
 msgstr "Grafisk visning av \"GPS-position\" ritar en linje från båten till en punkt i den upptäckta gränslinjen"
 
-#: src/WatchdogUI.cpp:706
+#: src/BurtonUI.cpp:706
 msgid "Require following NMEA sentences:"
 msgstr "Bevaka följande NMEA mening:"
 
-#: src/WatchdogUI.cpp:710
+#: src/BurtonUI.cpp:710
 msgid "$GPGGA"
 msgstr "$GPGGA"
 
-#: src/WatchdogUI.cpp:726
+#: src/BurtonUI.cpp:726
 msgid "at least every"
 msgstr "minst varje"
 
-#: src/WatchdogUI.cpp:733
+#: src/BurtonUI.cpp:733
 msgid "seconds"
 msgstr "sekunder"
 
-#: src/WatchdogUI.cpp:762
+#: src/BurtonUI.cpp:762
 msgid "No User Activity for"
 msgstr "Ingen användaraktivitet på"
 
-#: src/WatchdogUI.cpp:769
+#: src/BurtonUI.cpp:769
 msgid "minute(s)"
 msgstr "minut(er)"
 
-#: src/WatchdogUI.cpp:798
+#: src/BurtonUI.cpp:798
 msgid "Latitude"
 msgstr "Latitud"
 
-#: src/WatchdogUI.cpp:816
+#: src/BurtonUI.cpp:816
 msgid "Longitude"
 msgstr "Longitud"
 
-#: src/WatchdogUI.cpp:831
+#: src/BurtonUI.cpp:831
 msgid "Sync to Boat"
 msgstr "Synkronisera med båten"
 
-#: src/WatchdogUI.cpp:834
+#: src/BurtonUI.cpp:834
 msgid "Radius"
 msgstr "Radie"
 
-#: src/WatchdogUI.cpp:848
+#: src/BurtonUI.cpp:848
 msgid "Automatically syncronize to the boat whenever enabled"
 msgstr "Synkronisera till båtens position varje gång larmet aktiveras"
 
-#: src/WatchdogUI.cpp:851
+#: src/BurtonUI.cpp:851
 msgid "Graphical overlay displays bounding anchor area"
 msgstr "Grafisk visning ritar ankringsområdets gränser på kortet"
 
-#: src/WatchdogUI.cpp:887
+#: src/BurtonUI.cpp:887
 msgid "Port or Starboard"
 msgstr "Babord eller Styrbord"
 
-#: src/WatchdogUI.cpp:896
+#: src/BurtonUI.cpp:896
 msgid "Off Course By >"
 msgstr "Ur kurs mer än"
 
-#: src/WatchdogUI.cpp:903
+#: src/BurtonUI.cpp:903
 msgid "Degrees"
 msgstr "Grader"
 
-#: src/WatchdogUI.cpp:907
+#: src/BurtonUI.cpp:907
 msgid "With Course Of"
 msgstr "Från kursen"
 
-#: src/WatchdogUI.cpp:914
+#: src/BurtonUI.cpp:914
 msgid "Current Course"
 msgstr "Nuvarande kurs"
 
-#: src/WatchdogUI.cpp:920
+#: src/BurtonUI.cpp:920
 msgid "Graphical overlay displays lines bounding valid courses"
 msgstr "Grafisk visning ritar linjer för tillåten kursavvikelse"
 
-#: src/WatchdogUI.cpp:943
+#: src/BurtonUI.cpp:943
 msgid "Speed Alarm"
 msgstr "Fartavvikelse"
 
-#: src/WatchdogUI.cpp:954
+#: src/BurtonUI.cpp:954
 msgid "Under Speed"
 msgstr "Lågfart"
 
-#: src/WatchdogUI.cpp:954
+#: src/BurtonUI.cpp:954
 msgid "Over Speed"
 msgstr "Högfart"
 
-#: src/WatchdogUI.cpp:963
+#: src/BurtonUI.cpp:963
 msgid "Speed over ground"
 msgstr "Fart över grund (SOG)"
 
-#: src/WatchdogUI.cpp:967
+#: src/BurtonUI.cpp:967
 msgid "1"
 msgstr "1"
 
-#: src/WatchdogUI.cpp:978
+#: src/BurtonUI.cpp:978
 msgid "knots"
 msgstr "knop"
 
-#: src/WatchdogUI.cpp:991
+#: src/BurtonUI.cpp:991
 msgid "Seconds to Average\n"
 "SOG over"
 msgstr "Medelfarten räknas varje\n"
 " sekunder"
 
-#: src/WatchdogUI.cpp:1001
+#: src/BurtonUI.cpp:1001
 msgid "Graphical overlay displays circle with radius of this speed"
 msgstr "Grafisk visning ritar cirkel med vald fart som radie"
 
-#: src/WatchdogUI.h:68
+#: src/BurtonUI.h:68
 msgid "WatchDog"
 msgstr "Vakthunden"
 
-#: src/WatchdogUI.h:103
-msgid "About Watchdog Properties"
-msgstr "Om egenskaper för Watchdog"
+#: src/BurtonUI.h:103
+msgid "About Burton Properties"
+msgstr "Om egenskaper för Burton"
 
-#: src/WatchdogUI.h:142
-msgid "Watchdog Configuration"
+#: src/BurtonUI.h:142
+msgid "Burton Configuration"
 msgstr "Vakthundens inställningar"
 
-#: src/WatchdogUI.h:166
+#: src/BurtonUI.h:166
 msgid "New Alarm"
 msgstr "Nytt larm"
 
-#: src/WatchdogUI.h:202
+#: src/BurtonUI.h:202
 msgid "Edit Alarm"
 msgstr "Ändra larm"
 
-#: src/watchdog_pi.cpp:237
-msgid "Watchdog PlugIn for OpenCPN"
+#: src/burton_pi.cpp:237
+msgid "Burton PlugIn for OpenCPN"
 msgstr "Vakthunden. Modul för OpenCPN"
 
-#: src/watchdog_pi.cpp:242
-msgid "Watchdog PlugIn for OpenCPN\n"
+#: src/burton_pi.cpp:242
+msgid "Burton PlugIn for OpenCPN\n"
 "Alarm user of changing conditions."
 msgstr "Vakthunden. Modul till OpenCPN\n"
 "Larmar när valda gränser överskrids."
